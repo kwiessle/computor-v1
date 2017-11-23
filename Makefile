@@ -6,7 +6,7 @@
 #    By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/23 18:37:17 by kwiessle          #+#    #+#              #
-#    Updated: 2017/11/23 22:35:51 by kwiessle         ###   ########.fr        #
+#    Updated: 2017/11/24 00:08:20 by kwiessle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ all:	$(NAME)
 
 clean:
 	@rm -f $(OBJS)
-	@echo "\033[37mall FdF_files.o are deleted\033[0m"
+	@echo "\033[37mall $(NAME)_files.o are deleted\033[0m"
 
 fclean:	clean
 	@rm -f $(NAME)
