@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:39:06 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/23 23:38:52 by kwiessle         ###   ########.fr       */
+/*   Updated: 2017/11/24 11:47:57 by kwiessle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define COMPUTOR_H
 
 # include "define.h"
-# include <math.h>
+// # include <math.h>
 # include <stdio.h>
 
 /* PARSING */
@@ -27,6 +27,7 @@ short   check_format(char *equation);
 
 /* MATH */
 
+double ft_sqrt(double n);
 double  get_discriminent(double a, double b, double c);
 char    *natural_sqrt_root_1(double a, double b, double delta);
 char    *natural_sqrt_root_2(double a, double b, double delta);
