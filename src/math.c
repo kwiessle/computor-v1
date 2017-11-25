@@ -6,11 +6,12 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 21:39:32 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/24 11:48:57 by kwiessle         ###   ########.fr       */
+/*   Updated: 2017/11/24 19:10:37 by kwiessle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "computor.h"
+
 
 double ft_sqrt(double n)
 {
@@ -20,8 +21,8 @@ double ft_sqrt(double n)
   if (n < 0)
     return (_FAILURE);
   while(x - y > e) {
-    x = (x + y)/2;
-    y = n/x;
+    x = (x + y) / 2;
+    y = n / x;
   }
   return (x);
 }

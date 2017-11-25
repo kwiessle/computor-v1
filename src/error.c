@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:13:14 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/23 21:34:14 by kwiessle         ###   ########.fr       */
+/*   Updated: 2017/11/24 21:12:13 by kwiessle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ short   check_argument(char *equation) {
   short   i = 0;
 
   while (equation[i]) {
-    if (equation[i] == '^' && allowed_degree(equation[i + 1] == _FAILURE))
-        return (_FAILURE);
+    if (equation[i] == '^' && allowed_degree(equation[i + 1] == _FAILURE)) {
+      printf("%d\n", i);
+      return (_FAILURE);
+    }
     i++;
   }
   return (_SUCCESS);
@@ -67,10 +69,16 @@ short   check_argument(char *equation) {
 
 short   check_format(char *equation) {
   short   i = 0;
+  int     verif = 0;
   while (equation[i]) {
     if (allowed_format(equation[i]) == _FAILURE)
       return (_FAILURE);
+    if (equation[i] == '=')
+      verif++;
       i++;
   }
-  return (_SUCCESS);
+  if (verif != 1)
+    return (_SUCCESS);
+  else
+    return (_FAILURE);
 }

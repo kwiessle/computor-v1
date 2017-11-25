@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:39:06 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/24 11:47:57 by kwiessle         ###   ########.fr       */
+/*   Updated: 2017/11/24 20:56:08 by kwiessle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 # define COMPUTOR_H
 
 # include "define.h"
-// # include <math.h>
+# include "libft.h"
+# include <string.h>
+# include <stdlib.h>
 # include <stdio.h>
 
-/* PARSING */
+/* ERROR */
 
 void    display_error(short e_type);
 short   allowed_degree(char degree);
@@ -34,5 +36,11 @@ char    *natural_sqrt_root_2(double a, double b, double delta);
 char    *natural_sqrt_root_3(double a, double b);
 char    *complex_sqrt_root_1(double a, double b, double delta);
 char    *complex_sqrt_root_2(double a, double b, double delta);
+
+/* PARSER */
+
+char  *super_trim(char *str);
+char  *fix(char *str);
+double   get_coeff(char *equation_trimed, char degree);
 
 #endif
