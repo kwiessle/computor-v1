@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:13:14 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/24 21:12:13 by kwiessle         ###   ########.fr       */
+/*   Updated: 2017/11/25 17:31:39 by kwiessle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ short   allowed_degree(char degree) {
 
 short   allowed_format(char c) {
   short   i = 0;
-  char    *set = "0123456789 .=+-*/\0";
-
+  char    *set = "0123456789 .=+-*/Xx^\0";
   while (set[i]) {
     if (set[i] == c)
       return (_SUCCESS);
@@ -56,10 +55,10 @@ short   allowed_format(char c) {
 
 short   check_argument(char *equation) {
   short   i = 0;
-
+  short   tmp = 0;
   while (equation[i]) {
-    if (equation[i] == '^' && allowed_degree(equation[i + 1] == _FAILURE)) {
-      printf("%d\n", i);
+    tmp = allowed_degree(equation[i + 1]);
+    if (equation[i] == '^' && tmp == _FAILURE) {
       return (_FAILURE);
     }
     i++;
@@ -68,17 +67,19 @@ short   check_argument(char *equation) {
 }
 
 short   check_format(char *equation) {
-  short   i = 0;
+  short   i = 0, tmp = 0;
   int     verif = 0;
   while (equation[i]) {
-    if (allowed_format(equation[i]) == _FAILURE)
+    tmp = allowed_format(equation[i]);
+    printf("%c    ->    %d\n", equation[i], tmp);
+    if (tmp == _FAILURE)
       return (_FAILURE);
     if (equation[i] == '=')
       verif++;
       i++;
   }
   if (verif != 1)
-    return (_SUCCESS);
-  else
     return (_FAILURE);
+  else
+    return (_SUCCESS);
 }

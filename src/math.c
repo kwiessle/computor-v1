@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 21:39:32 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/24 19:10:37 by kwiessle         ###   ########.fr       */
+/*   Updated: 2017/11/25 18:40:52 by kwiessle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@ double ft_sqrt(double n)
 {
   double x = n;
   double y = 1;
-  double e = 0.000001;
   if (n < 0)
     return (_FAILURE);
-  while(x - y > e) {
+  while(x - y > 0) {
     x = (x + y) / 2;
     y = n / x;
   }
