@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:40:23 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/27 17:57:27 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/11/27 17:58:29 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,5 @@ int  main(int ac, char **av) {
       printf("X1: %s\n", complex_sqrt_root(a,b, delta, '+'));
       printf("X2: %s\n", complex_sqrt_root(a,b, delta, '-'));
     }
-  }
-  return (0);
+    return (0);
 }
