@@ -6,12 +6,11 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 21:39:32 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/27 17:57:27 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/11/27 18:01:37 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "computor.h"
-#include <math.h>
 
 double pgcd(int nb1, int nb2)
 {
