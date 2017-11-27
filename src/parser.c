@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 18:04:44 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/25 21:05:58 by kwiessle         ###   ########.fr       */
+/*   Updated: 2017/11/27 17:55:45 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 
 char  *super_trim(char *str) {
-  int     i = 0, j = 0, spaces = 0, ini_len = strlen(str);
+  int     i = 0, j = 0, spaces = 0;
   char    *super;
   while (str[i]) {
     if (str[i] ==  ' ')
       spaces++;
     i++;
   }
-  if (!(super = malloc(sizeof(char*) * (ini_len - spaces))))
+  if (!(super = malloc(sizeof(char*) * (strlen(str) - spaces))))
     return (NULL);
   i = 0;
   while (str[i]) {
@@ -49,7 +49,6 @@ char  *fix(char *str) {
     ++str;
     i--;
   }
-  printf("%d\n", i);
   return (str);
 }
 

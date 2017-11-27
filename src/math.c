@@ -6,11 +6,12 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 21:39:32 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/25 18:40:52 by kwiessle         ###   ########.fr       */
+/*   Updated: 2017/11/27 17:56:02 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "computor.h"
+#include <math.h>
 
 
 double ft_sqrt(double n)
@@ -26,36 +27,38 @@ double ft_sqrt(double n)
   return (x);
 }
 
+double ft_double_abs(double n)
+{
+   if ( n < 0 ) {
+      return (-n);
+   }
+   return (n);
+}
+
 double  get_discriminent(double a, double b, double c) {
   return (b * b - 4 * (a * c ));
 }
 
-char  *natural_sqrt_root_1(double a, double b, double delta) {
-  char  *root;
-  asprintf(&root, "%lf", ((-b + ft_sqrt(delta)) / (2 * a)));
-  return (root);
+double  natural_sqrt_root_1(double a, double b, double delta) {
+  return ((-b + ft_sqrt(delta)) / (2 * a));
 }
 
-char  *natural_sqrt_root_2(double a, double b, double delta) {
-  char  *root;
-  asprintf(&root, "%lf", ((-b - ft_sqrt(delta)) / (2 * a)));
-  return (root);
+double  natural_sqrt_root_2(double a, double b, double delta) {
+   return ((-b - ft_sqrt(delta)) / (2 * a));
 }
 
-char  *natural_sqrt_root_3(double a, double b) {
-  char  *root;
-  asprintf(&root, "%lf", -b / (2 * a));
-  return (root);
+double natural_sqrt_root_3(double a, double b) {
+   return (-b / (2 * a));
 }
 
 char *complex_sqrt_root_1(double a, double b, double delta) {
   char  *root;
-  asprintf(&root, "-%lf + %lfi", b / (2 * a), ft_sqrt(-delta) / (2 * a));
+  asprintf(&root, "-%g + %gi", b / (2 * a), ft_sqrt(-delta) / (2 * a));
   return (root);
 }
 
 char *complex_sqrt_root_2(double a, double b, double delta) {
   char  *root;
-  asprintf(&root, "-%lf - %lfi", b / (2 * a), ft_sqrt(-delta) / (2 * a));
+  asprintf(&root, "-%g - %gi", b / (2 * a), ft_sqrt(-delta) / (2 * a));
   return (root);
 }
