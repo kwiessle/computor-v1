@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:39:06 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/24 20:56:08 by kwiessle         ###   ########.fr       */
+/*   Updated: 2017/11/27 17:24:44 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,13 @@ short   check_format(char *equation);
 
 /* MATH */
 
-double ft_sqrt(double n);
+double  ft_sqrt(double n);
 double  get_discriminent(double a, double b, double c);
-char    *natural_sqrt_root_1(double a, double b, double delta);
-char    *natural_sqrt_root_2(double a, double b, double delta);
+char    *natural_sqrt_root(double a, double b, double delta, char sign);
 char    *natural_sqrt_root_3(double a, double b);
-char    *complex_sqrt_root_1(double a, double b, double delta);
-char    *complex_sqrt_root_2(double a, double b, double delta);
-
+char    *complex_sqrt_root(double a, double b, double delta, char sign);
+double  ft_double_abs(double n);
+double  pgcd(int nb1, int nb2);
 /* PARSER */
 
 char  *super_trim(char *str);
