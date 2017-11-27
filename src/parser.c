@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 18:04:44 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/27 17:55:45 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/11/27 17:57:27 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,21 +75,18 @@ double   get_coeff(char *equation_trimed, char degree) {
   print_tab("LEFT  ->", left);
   print_tab("RIGHT  ->", right);
   while (left[i]) {
-    if (left[i][2] == degree)
+    if (left[i][2] == degree || left[i][3] == degree)
       a = a + atof(fix(left[i -1]));
     i++;
   }
   i = 0;
   while (right[i]) {
-    if (right[i][2] == degree)
+    if (right[i][2] == degree || right[i][3] == degree)
       a = a + (-1 * atof(fix(right[i -1])));
     i++;
   }
   return (a);
 }
-
-
-
 
 // int   main(int ac, char **av) {
 //   printf("FINAL  -> %lf\n", get_coeff(super_trim(av[1]), '2'));
