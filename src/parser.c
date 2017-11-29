@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 18:04:44 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/29 17:43:20 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/11/29 18:06:02 by kwiessle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 char  *minimize(char *str) {
   int     i = 0, j = 0, spaces = 0;
   char    *super;
+  char    *fix;
   while (str[i]) {
     if (str[i] ==  ' ')
       spaces++;
@@ -31,6 +32,10 @@ char  *minimize(char *str) {
     i++;
   }
   super[j] = '\0';
+  if (super[0] != '-' && super[0] != '+') {
+    fix = ft_strjoin("+", super);
+    return (fix);
+  }
   return (super);
 }
 
@@ -44,7 +49,7 @@ char  *super_trim(char *str) {
   while (minimized[i]) {
     if (minimized[i] == '+' || minimized[i] == '-' || minimized[i] == '*' || minimized[i] == '=')
       operators++;
-    if (minimized[i] == '=' && minimized[i + 2] != '-')
+    if (minimized[i] == '=' && minimized[i + 1] != '-' && minimized[i + 1] != '+')
       verif++;
     i++;
   }
@@ -134,7 +139,7 @@ static double nat_loop(char **side) {
   int     i = 0;
   double  coeff = 0.0;
   while (side[i]) {
-    if ((side[i][0] == '+' || side[i][0] == '-') && (side[0 +1][0] != 'X') && (side[i +2][0] == '#' || (side[i +2][0] == '+' || side[i +2][0] == '-'))) {
+    if ((side[i][0] == '+' || side[i][0] == '-') && (side[i +1][0] != 'X') && (side[i +2][0] == '#' || (side[i +2][0] == '+' || side[i +2][0] == '-'))) {
       coeff = coeff + atof(ft_strjoin(side[i], side[i +1]));
     }
     else if (side[i][0] == 'X' && ft_strcmp("X^0", side[i]) == 0) {
@@ -144,6 +149,7 @@ static double nat_loop(char **side) {
   }
   return (coeff);
 }
+
 
 int   get_max_pow(char *equation_trimed) {
   char *tmp = equation_trimed;
@@ -166,19 +172,13 @@ int   get_max_pow(char *equation_trimed) {
   return(max_pow);
 }
 
-double   get_coeff(char *equation_trimed, int degree) {
+double   get_coeff(char *equation, int degree) {
   char    **sides;
   char    **left;
   char    **right;
   double  a = 0.0;
-  char    *equation;
   char    *str_degree = ft_itoa(degree);
 
-  if (equation_trimed[1] != '-') {
-    equation = ft_strjoin("+ ", equation_trimed);
-  } else {
-    equation = ft_strdup(equation_trimed);
-  }
   sides = ft_strsplit(equation, '=');
   left = ft_strsplit(sides[0],' ');
   right = ft_strsplit(sides[1], ' ');
@@ -188,6 +188,7 @@ double   get_coeff(char *equation_trimed, int degree) {
     a = low_loop(left) - low_loop(right);
   } else if (degree == 0) {
     a = nat_loop(left) - nat_loop(right);
+
   }
   return (a);
 }
