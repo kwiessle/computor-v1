@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 18:04:44 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/29 15:53:31 by kwiessle         ###   ########.fr       */
+/*   Updated: 2017/11/29 15:54:19 by kwiessle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,18 +145,6 @@ static double nat_loop(char **side) {
   return (coeff);
 }
 
-static double  get_high_coeff(char **left, char ** right, char *degree) {
-  return (high_loop(left, degree) - high_loop(right, degree));
-}
-
-static double   get_low_coeff(char **left, char **right) {
-  return (low_loop(left) - low_loop(right));
-}
-
-static double get_nat_coeff(char **left, char **right) {
-  return (nat_loop(left) - nat_loop(right));
-}
-
 int   get_max_pow(char *equation_trimed) {
   char *tmp = equation_trimed;
   int i = 0;
@@ -195,11 +183,11 @@ double   get_coeff(char *equation_trimed, int degree) {
   left = ft_strsplit(sides[0],' ');
   right = ft_strsplit(sides[1], ' ');
   if (degree >= 2) {
-    a = get_high_coeff(left, right, str_degree);
+    a = high_loop(left, str_degree) - high_loop(right, str_degree);
   } else if (degree == 1) {
-    a = get_low_coeff(left, right);
+    a = low_loop(left) - low_loop(right);
   } else if (degree == 0) {
-    a = get_nat_coeff(left, right);
+    a = nat_loop(left) - nat_loop(right);
   }
   return (a);
 }
