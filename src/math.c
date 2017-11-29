@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 21:39:32 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/29 13:58:42 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/11/29 17:38:28 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,12 @@ static char *complex_sqrt_I(double a, double sqrt_delta, char sign) {
   double divide = sqrt_delta / (2 * a);
   double _pgcd = ft_double_abs(pgcd((int)sqrt_delta, (int)(2 * a)));
   if (sqrt_delta != (int)sqrt_delta || divide == (int)divide) {
-    asprintf(&ireal, "%c %g", divide < 0 && sign == '+' ? '-' : '+',
+    asprintf(&ireal, "%c %g", divide < 0 ? sign == '+' ? '-' : '+' : sign == '+' ? '+' : '-',
      ft_double_abs(divide));
   }
   else {
-    asprintf(&ireal, "%c %g/%g", divide < 0 && sign == '+' ? '-' : '+',
-     ft_double_abs(sqrt_delta / _pgcd), ft_double_abs((2 * a) / _pgcd));
+    asprintf(&ireal, "%c %g/%g", divide < 0 ? sign == '+' ? '-' : '+' : sign == '+' ? '+' : '-',
+      ft_double_abs(sqrt_delta / _pgcd), ft_double_abs((2 * a) / _pgcd));
   }
   return ireal;
 }
@@ -118,5 +118,4 @@ char *complex_sqrt_root(double a, double b, double delta, char sign) {
   asprintf(&root, "%s %si", real, ireal);
   print_complex_sqrt(a, b, delta, sign);
   return (root);
-  return root;
 }
