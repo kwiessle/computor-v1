@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 18:04:44 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/27 17:57:27 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/11/28 17:44:43 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,33 +63,60 @@ void  print_tab(char *name, char **tab) {
   }
 }
 
-double   get_coeff(char *equation_trimed, char degree) {
-  char    **sides;
+int   get_max_pow(char *equation_trimed) {
+  char *tmp = equation_trimed;
+  int i = 0;
+  int max_pow = 0;
+  char *tmp2;
+  while((tmp = ft_strchr(tmp, '^')) != NULL) {
+    tmp++;
+    tmp2 = ft_strdup(tmp);
+    while(tmp2[i] && (tmp2[i] != '-' && tmp2[i] != '+' && tmp2[i] != '=')) {
+      i++;
+    }
+    tmp2[i] = '\0';
+    max_pow = max_pow < ft_atoi(tmp2) ? ft_atoi(tmp2) : max_pow;
+  }
+  return(max_pow);
+}
+
+double   get_coeff(char *equation_trimed, int degree) {
   char    **left;
   char    **right;
   int     i = 0;
+  int     j = 0;
   double  a = 0.0;
-  sides = ft_strsplit(equation_trimed, '=');
-  left = ft_strsplit(sides[0],'*');
-  right = ft_strsplit(sides[1], '*');
-  print_tab("LEFT  ->", left);
-  print_tab("RIGHT  ->", right);
+  char    *_pow;
+  (void)degree;
+  left = ft_strsplit(ft_strsplit(equation_trimed, '=')[0],'*');
+  right = ft_strsplit(ft_strsplit(equation_trimed, '=')[1], '*');
   while (left[i]) {
-    if (left[i][2] == degree || left[i][3] == degree)
-      a = a + atof(fix(left[i -1]));
+    if (left[i][1] == '^') {
+      _pow = ft_strsub(left[i], 2, ft_strlen(left[i]));
+      while(_pow[j] && (_pow[j] != '-' && _pow[j] != '+' && _pow[j] != '=')) {
+        j++;
+      }
+      _pow[j] = '\0';
+      if (ft_atoi(_pow) == degree) {
+        a = a + atof(fix(left[i - 1]));
+      }
+    }
     i++;
   }
   i = 0;
   while (right[i]) {
-    if (right[i][2] == degree || right[i][3] == degree)
-      a = a + (-1 * atof(fix(right[i -1])));
+    if (right[i][1]== '^') {
+      _pow = ft_strsub(right[i], 2, ft_strlen(right[i]));
+      while(_pow[j] && (_pow[j] != '-' && _pow[j] != '+' && _pow[j] != '=')) {
+        j++;
+      }
+      _pow[j] = '\0';
+      if (ft_atoi(_pow) == degree) {
+        a = a + (-1 * atof(fix(right[i - 1])));
+      }
+    }
     i++;
   }
   return (a);
 }
 
-// int   main(int ac, char **av) {
-//   printf("FINAL  -> %lf\n", get_coeff(super_trim(av[1]), '2'));
-//   // printf("%s\n", fix(av[1]));
-//   return (0);
-// }

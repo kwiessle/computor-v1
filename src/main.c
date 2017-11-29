@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:40:23 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/27 17:58:29 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/11/28 17:40:44 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,43 +28,68 @@ int  main(int ac, char **av) {
   //     display_error(3);
   //     return (0);
   // } else {
-    double a = get_coeff(super_trim(av[1]), '2');
-    double b = get_coeff(super_trim(av[1]), '1');
-    double c = get_coeff(super_trim(av[1]), '0');
-    double d = get_coeff(super_trim(av[1]), '3');
-    if (d != 0 ) {
-      printf("Reduced form: %g * X^3 %c %g * X^2 %c %g * X^1 %c %g * X^0 = 0\n",
-      d, a < 0 ? 45 : 43, ft_double_abs(a), b < 0 ? 45 : 43, ft_double_abs(b), c < 0 ? 45: 43,  ft_double_abs(c));
-      printf("Polynomial degree: %d\n", 3);
-      printf("The polynomial degree is stricly greater than 2, I can't solve.\n");
-      return (0);
+    char *equation_trimed = super_trim(av[1]);
+    int max_pow = get_max_pow(equation_trimed);
+    int tmp_pow = max_pow;
+    double *coefs;
+    if ( !(coefs = (double *)malloc(max_pow * sizeof(double))) ) {
+      return (_FAILURE);
     }
-    printf("Reduced form: %g * X^2 %c %g * X^1 %c %g * X^0 = 0\n",
-     a, b < 0 ? 45 : 43,  ft_double_abs(b), c < 0 ? 45: 43,  ft_double_abs(c));
-    printf("Polynomial degree: %d\n", a == 0 ? b == 0 ? 0 : 1 : 2);
-    if ( a == 0 && c == 0 && b == 0) {
-      printf("All numbers are solution\n");
-      return (0);
-    }
-    if ( a == 0 ) {
-      printf("The solution is:\nX1: %g\n", -c / b);
-      return (0);
-   }
+    int i = 0;
 
-    double delta = get_discriminent(a,b,c);
+    while ( tmp_pow >= 0 ) {
+      coefs[i] = get_coeff(equation_trimed, tmp_pow);
+      tmp_pow--;
+      i++;
+    }
+    i = 0;
+    tmp_pow = max_pow;
+    printf("Reduced form: ");
+    while ( tmp_pow >= 0 ) {
+      printf("%c%c", i == 0 ? coefs[i] < 0 ? 45 : 0 : coefs[i] <= 0 ? 45 : 43 , i == 0 ? 0 : ' ');
+      printf("%g * X^%d ", ft_double_abs(coefs[i]), tmp_pow);
+      i++;
+      tmp_pow--;
+    }
+    printf("= 0\n");
+    printf("Polynomial degree: %d\n", max_pow);
+    if (max_pow >= 3) {
+      printf("\e[1;38;5;160;4mThe polynomial degree is stricly greater than 2, I can't solve.\e[0m\n");
+      return (0);
+    }
+    if (max_pow == 0 ) {
+      printf("\e[1;38;5;160;4mThis isn't a valid equation\e[0m\n");
+      return (0);
+    }
+    if (max_pow == 1) {
+      if (coefs[1] == 0 && coefs[0] == 0) {
+        printf("\e[1;38;5;82;4mAll numbers are solution\e[0m\n");
+        return (0);
+      }
+      printf("a = 0, The unique solution is:\n\n");
+      printf("\e[1;38;5;130mX1 = -c / b\e[0m\n");
+      printf("X1 = - (%g) / %g\n\n", coefs[max_pow], coefs[max_pow - 1]);
+      printf("\e[1;38;5;82;4mX1= %g\e[0m\n", -coefs[max_pow] / coefs[max_pow - 1]);
+      return (0);
+    }
+    if (coefs[0] == 0 && coefs[1] == 0  && coefs[2] == 0) {
+      printf("\e[1;38;5;82;4mAll numbers are solution\e[0m\n");
+      return (0);
+    }
+    double delta = get_discriminent(coefs[max_pow - 2],coefs[max_pow - 1],coefs[max_pow]);
     if (delta > 0) {
-      printf("Δ = %g is strictly positive, the two solutions are:\n", delta);
-      printf("X1: %s\n", natural_sqrt_root(a,b, delta, '+'));
-      printf("X2: %s\n", natural_sqrt_root(a,b, delta, '-'));
+      printf("Δ is strictly positive, the two solutions are:\n\n");
+      printf("\e[1;38;5;82;4mX1 = %s\e[0m\n\n", natural_sqrt_root(coefs[max_pow - 2],coefs[max_pow - 1], delta, '+'));
+      printf("\e[1;38;5;82;4mX2 = %s\e[0m\n", natural_sqrt_root(coefs[max_pow - 2],coefs[max_pow - 1], delta, '-'));
     }
     else if (delta == 0) {
-      printf("Δ = %g is equal to zero, the unique solution is:\n", delta);
-      printf("X1: %s\n", natural_sqrt_root_3(a,b));
+      printf("Δ is equal to zero, the unique solution is:\n\n");
+      printf("\e[1;38;5;82;4mX1 = %s\e[0m\n", natural_sqrt_root_3(coefs[max_pow - 2],coefs[max_pow - 1]));
     }
     else {
-      printf("Δ = %g is strictly negative, the two solutions are:\n", delta);
-      printf("X1: %s\n", complex_sqrt_root(a,b, delta, '+'));
-      printf("X2: %s\n", complex_sqrt_root(a,b, delta, '-'));
+      printf("Δ is strictly negative, the two solutions are:\n\n");
+      printf("\e[1;38;5;82;4mX1 = %s\e[0m\n\n", complex_sqrt_root(coefs[max_pow - 2],coefs[max_pow - 1], delta, '+'));
+      printf("\e[1;38;5;82;4mX2 = %s\e[0m\n", complex_sqrt_root(coefs[max_pow - 2],coefs[max_pow - 1], delta, '-'));
     }
     return (0);
 }
