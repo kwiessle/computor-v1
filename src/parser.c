@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 18:04:44 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/29 14:36:22 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/11/29 15:54:19 by kwiessle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,82 +81,47 @@ char  *super_trim(char *str) {
   return (fix);
 }
 
-static double  get_high_coeff(char **left, char ** right, char *degree) {
+
+
+static double high_loop(char **side, char *degree) {
   int     i = 0;
   double  coeff = 0.0;
-  while (left[i]) {
-    if (left[i][0] == 'X' && ft_strlen(left[i]) > 1 && ft_strcmp(left[i], ft_strjoin("X^", degree)) == 0) {
-      if (left[i -1][0] == '+') {
+  while (side[i]) {
+    if (side[i][0] == 'X' && ft_strlen(side[i]) > 1 && ft_strcmp(side[i], ft_strjoin("X^", degree)) == 0) {
+      if (side[i -1][0] == '+') {
         coeff = coeff + 1.0;
-      } else if (left[i -1][0] == '-') {
+      } else if (side[i -1][0] == '-') {
         coeff = coeff - 1.0;
       } else {
-        coeff = coeff + (atof(ft_strjoin(left[i -3], left[i -2])));
-      }
-    }
-    i++;
-  }
-  i = 0;
-  while (right[i]) {
-    if (right[i][0] == 'X' && ft_strlen(right[i]) > 1 && ft_strcmp(right[i], ft_strjoin("X^", degree)) == 0) {
-      if (right[i -1][0] == '+') {
-        coeff = coeff - 1.0;
-      } else if (right[i -1][0] == '-') {
-        coeff = coeff + 1.0;
-      } else {
-        coeff = coeff + (-1 * atof(ft_strjoin(right[i -3], right[i -2])));
+        coeff = coeff + (atof(ft_strjoin(side[i -3], side[i -2])));
       }
     }
     i++;
   }
   return (coeff);
 }
-//
-static double   get_low_coeff(char **left, char **right) {
+
+static double low_loop(char **side) {
   int     i = 0;
   double  coeff = 0.0;
-  while (left[i]) {
-    if (left[i][0] == 'X') {
-      if (ft_strlen(left[i]) == 1) {
-        if (left[i -1][0] == '+') {
+  while (side[i]) {
+    if (side[i][0] == 'X') {
+      if (ft_strlen(side[i]) == 1) {
+        if (side[i -1][0] == '+') {
           coeff = coeff + 1.0;
-        } else if (left[i -1][0] == '-') {
+        } else if (side[i -1][0] == '-') {
           coeff = coeff - 1.0;
         } else {
-          coeff = coeff + (atof(ft_strjoin(left[i -3], left[i -2])));
+          coeff = coeff + (atof(ft_strjoin(side[i -3], side[i -2])));
         }
       }
-      if (ft_strlen(left[i]) > 1 && ft_strcmp(left[i], "X^1") == 0) {
-          if (left[i -1][0] == '+') {
+      if (ft_strlen(side[i]) > 1 && ft_strcmp(side[i], "X^1") == 0) {
+          if (side[i -1][0] == '+') {
             coeff = coeff + 1.0;
-          } else if (left[i -1][0] == '-') {
+          } else if (side[i -1][0] == '-') {
             coeff = coeff - 1.0;
           } else {
-            coeff = coeff + (atof(ft_strjoin(left[i -3], left[i -2])));
-          }
-      }
-    }
-    i++;
-  }
-  i = 0;
-  while (right[i]) {
-    if (right[i][0] == 'X') {
-      if (ft_strlen(right[i]) == 1) {
-        if (right[i -1][0] == '+') {
-          coeff = coeff - 1.0;
-        } else if (right[i -1][0] == '-') {
-          coeff = coeff + 1.0;
-        } else {
-          coeff = coeff + (-1 * atof(ft_strjoin(right[i -3], right[i -2])));
-        }
-      }
-      if (ft_strlen(right[i]) > 1 && ft_strcmp(right[i], "X^1") == 0) {
-          if (right[i -1][0] == '+') {
-            coeff = coeff - 1.0;
-          } else if (right[i -1][0] == '-') {
-            coeff = coeff + 1.0;
-          } else {
-            coeff = coeff + (-1 * atof(ft_strjoin(right[i -3], right[i -2])));
+            coeff = coeff + (atof(ft_strjoin(side[i -3], side[i -2])));
           }
       }
     }
@@ -165,28 +130,15 @@ static double   get_low_coeff(char **left, char **right) {
   return (coeff);
 }
 
-
-
-static double get_nat_coeff(char **left, char **right) {
+static double nat_loop(char **side) {
   int     i = 0;
   double  coeff = 0.0;
-
-  while (left[i]) {
-    if ((left[i][0] == '+' || left[i][0] == '-') && (left[0 +1][0] != 'X') && (left[i +2][0] == '#' || (left[i +2][0] == '+' || left[i +2][0] == '-'))) {
-      coeff = coeff + atof(ft_strjoin(left[i], left[i +1]));
+  while (side[i]) {
+    if ((side[i][0] == '+' || side[i][0] == '-') && (side[0 +1][0] != 'X') && (side[i +2][0] == '#' || (side[i +2][0] == '+' || side[i +2][0] == '-'))) {
+      coeff = coeff + atof(ft_strjoin(side[i], side[i +1]));
     }
-    else if (left[i][0] == 'X' && ft_strcmp("X^0", left[i]) == 0) {
-      coeff = coeff + (atof(ft_strjoin(left[i -3], left[i -2])));
-    }
-    i++;
-  }
-  i = 0;
-  while (right[i]) {
-    if ((right[i][0] == '+' || right[i][0] == '-') && (right[0 +1][0] != 'X') && (right[i +2][0] == '#' || (right[i +2][0] == '+' || right[i +2][0] == '-'))) {
-      coeff = coeff + (-1 * atof(ft_strjoin(right[i], right[i +1])));
-    }
-    else if (right[i][0] == 'X' && ft_strcmp("X^0", right[i]) == 0) {
-      coeff = coeff + (-1 * atof(ft_strjoin(right[i -3], right[i -2])));
+    else if (side[i][0] == 'X' && ft_strcmp("X^0", side[i]) == 0) {
+      coeff = coeff + (atof(ft_strjoin(side[i -3], side[i -2])));
     }
     i++;
   }
@@ -231,11 +183,11 @@ double   get_coeff(char *equation_trimed, int degree) {
   left = ft_strsplit(sides[0],' ');
   right = ft_strsplit(sides[1], ' ');
   if (degree >= 2) {
-    a = get_high_coeff(left, right, str_degree);
+    a = high_loop(left, str_degree) - high_loop(right, str_degree);
   } else if (degree == 1) {
-    a = get_low_coeff(left, right);
+    a = low_loop(left) - low_loop(right);
   } else if (degree == 0) {
-    a = get_nat_coeff(left, right);
+    a = nat_loop(left) - nat_loop(right);
   }
   return (a);
 }
