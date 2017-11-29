@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 21:39:32 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/29 17:38:28 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/11/29 17:51:15 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char  *natural_sqrt_root(double a, double b, double delta, char sign) {
   double dividend = sign == '+' ? -b + ft_sqrt(delta) : -b - ft_sqrt(delta);
   double divisor = 2 * a;
   double _pgcd = ft_double_abs(pgcd((int)(dividend), (int)(divisor)));
-  if ( dividend != (int)dividend ||
+  if ( a != (int)a || dividend != (int)dividend ||
   dividend / divisor == (int)(dividend / divisor)) {
     asprintf(&root, "%g", (dividend) / divisor);
   }
@@ -68,7 +68,7 @@ char  *natural_sqrt_root(double a, double b, double delta, char sign) {
 char  *natural_sqrt_root_3(double a, double b) {
   char  *root;
   double _pgcd = ft_double_abs(pgcd((int)(-b), (int)(2 * a)));
-  if ( -b != (int)(-b) || -b / (2 * a) == (int)(-b / (2 * a))) {
+  if ( a != (int)(a) || -b != (int)(-b) || -b / (2 * a) == (int)(-b / (2 * a))) {
     asprintf(&root, "%g", -b / (2 * a));
   }
   else {
@@ -81,7 +81,7 @@ char  *natural_sqrt_root_3(double a, double b) {
 static char *complex_sqrt_R(double a, double b) {
   char *real;
   double _pgcd = pgcd((int)b, (int)(2 * a));
-  if ( -b != (int)-b ||  -b / (2 * a) == (int)(-b / (2 * a)) ) {
+  if ( a != (int)a || -b != (int)-b ||  -b / (2 * a) == (int)(-b / (2 * a)) ) {
     asprintf(&real, "%g", -b / (2 * a));
   }
   else {
@@ -94,7 +94,7 @@ static char *complex_sqrt_I(double a, double sqrt_delta, char sign) {
   char *ireal;
   double divide = sqrt_delta / (2 * a);
   double _pgcd = ft_double_abs(pgcd((int)sqrt_delta, (int)(2 * a)));
-  if (sqrt_delta != (int)sqrt_delta || divide == (int)divide) {
+  if (a != (int)a || sqrt_delta != (int)sqrt_delta || divide == (int)divide) {
     asprintf(&ireal, "%c %g", divide < 0 ? sign == '+' ? '-' : '+' : sign == '+' ? '+' : '-',
      ft_double_abs(divide));
   }
