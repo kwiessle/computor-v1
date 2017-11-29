@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 18:04:44 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/29 11:53:10 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/11/29 13:40:22 by kwiessle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,20 @@ char  *minimize(char *str) {
 
 char  *super_trim(char *str) {
   char  *minimized = minimize(str);
-  printf("%s\n", minimized);
   char  *trimed;
   char  *fix;
+  int   verif = 0;
   int   len = strlen(minimized), i = 0, operators = 0, j = 0;
+
   while (minimized[i]) {
     if (minimized[i] == '+' || minimized[i] == '-' || minimized[i] == '*' || minimized[i] == '=')
       operators++;
+    if (minimized[i] == '=' && minimized[i + 2] != '-')
+      verif++;
     i++;
   }
   i = 0;
-  if (!(trimed = malloc(sizeof(char *) * (len + (operators * 2) + 2))))
+  if (!(trimed = malloc(sizeof(char *) * (len + (operators * 2) + 2  + (verif * 3)))))
     return (NULL);
   while (minimized[i]) {
     if (minimized[i] == '+' || minimized[i] == '-' || minimized[i] == '*' ) {
@@ -58,7 +61,15 @@ char  *super_trim(char *str) {
       trimed[j] = ' ';
       trimed[j + 1] = '#';
       trimed[j + 2] = minimized[i];
-      j = j + 2;
+      if (verif == 1) {
+        j++;
+        trimed[j + 2] = ' ';
+        trimed[j + 3] = '+';
+        trimed[j + 4] = ' ';
+        j = j + 4;
+      } else {
+        j = j + 2;
+      }
     } else {
       trimed[j] = minimized[i];
     }
@@ -225,8 +236,8 @@ double   get_coeff(char *equation_trimed, int degree) {
   sides = ft_strsplit(equation, '=');
   left = ft_strsplit(sides[0],' ');
   right = ft_strsplit(sides[1], ' ');
-  print_tab("LEFT  ->", left);
-  print_tab("RIGHT  ->", right);
+  // print_tab("LEFT  ->", left);
+  // print_tab("RIGHT  ->", right);
   if (degree >= 2) {
     a = get_high_coeff(left, right, str_degree);
   } else if (degree == 1) {
