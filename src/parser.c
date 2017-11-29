@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 18:04:44 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/29 14:36:22 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/11/29 15:52:37 by kwiessle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,35 +81,29 @@ char  *super_trim(char *str) {
   return (fix);
 }
 
-static double  get_high_coeff(char **left, char ** right, char *degree) {
+
+
+static double high_loop(char **side, char *degree) {
   int     i = 0;
   double  coeff = 0.0;
-  while (left[i]) {
-    if (left[i][0] == 'X' && ft_strlen(left[i]) > 1 && ft_strcmp(left[i], ft_strjoin("X^", degree)) == 0) {
-      if (left[i -1][0] == '+') {
+  while (side[i]) {
+    if (side[i][0] == 'X' && ft_strlen(side[i]) > 1 && ft_strcmp(side[i], ft_strjoin("X^", degree)) == 0) {
+      if (side[i -1][0] == '+') {
         coeff = coeff + 1.0;
-      } else if (left[i -1][0] == '-') {
+      } else if (side[i -1][0] == '-') {
         coeff = coeff - 1.0;
       } else {
-        coeff = coeff + (atof(ft_strjoin(left[i -3], left[i -2])));
-      }
-    }
-    i++;
-  }
-  i = 0;
-  while (right[i]) {
-    if (right[i][0] == 'X' && ft_strlen(right[i]) > 1 && ft_strcmp(right[i], ft_strjoin("X^", degree)) == 0) {
-      if (right[i -1][0] == '+') {
-        coeff = coeff - 1.0;
-      } else if (right[i -1][0] == '-') {
-        coeff = coeff + 1.0;
-      } else {
-        coeff = coeff + (-1 * atof(ft_strjoin(right[i -3], right[i -2])));
+        coeff = coeff + (atof(ft_strjoin(side[i -3], side[i -2])));
       }
     }
     i++;
   }
   return (coeff);
+}
+
+
+static double  get_high_coeff(char **left, char ** right, char *degree) {
+  return (high_loop(left, degree) - high_loop(right, degree));
 }
 //
 static double   get_low_coeff(char **left, char **right) {
