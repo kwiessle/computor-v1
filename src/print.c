@@ -6,7 +6,7 @@
 /*   By: vquesnel <vquesnel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 13:55:13 by vquesnel          #+#    #+#             */
-/*   Updated: 2017/11/29 17:26:41 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/11/29 18:08:03 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,24 @@ int      print_exceptions(int max_pow, double *coefs) {
         ft_double_abs(coefs[max_pow - 1] / _pgcd));
     return _FAILURE;
   }
-  if (coefs[0] == 0 && coefs[1] == 0  && coefs[2] == 0) {
-    printf("\e[1;38;5;82;4ma = 0\tb = 0\tc = 0\e[0m\n\n");
-    printf("a = 0, b = 0 and c = 0 so:\n\n");
+  if (coefs[0] == 0 && coefs[1] == 0 ) {
+    printf("\e[1;38;5;82;4ma = 0\tb = 0\tc = %g\e[0m\n\n", coefs[2]);
+    printf("a = 0 and b = 0 so:\n\n");
     printf("\e[1;38;5;82;4mAll numbers are solution\e[0m\n");
+    return _FAILURE;
+  }
+  if (coefs[max_pow - 2] == 0 ) {
+    printf("\e[1;38;5;82;4ma = %g\tb = %g\tc = %g\e[0m\n\n", coefs[max_pow - 2], coefs[max_pow - 1], coefs[max_pow]);
+    printf("a = 0, The unique solution is:\n\n");
+    printf("\e[1;38;5;130mX1 = -c / b\e[0m\n");
+    double divide = -coefs[max_pow] / coefs[max_pow - 1];
+    double _pgcd = ft_double_abs(pgcd((int)coefs[max_pow], (int)coefs[max_pow - 1]));
+    printf("X1 = - (%g) / %g\n", coefs[max_pow], coefs[max_pow - 1]);
+    -coefs[max_pow] != (int)-coefs[max_pow] || divide == (int)(divide) ?
+      printf("\e[1;38;5;82;4mX1 = %g\e[0m\n", divide) :
+      printf("\e[1;38;5;82;4mX1 = %s%g/%g\e[0m\n", divide < 0 ? "- " : "",
+        ft_double_abs(-coefs[max_pow] / _pgcd),
+        ft_double_abs(coefs[max_pow - 1] / _pgcd));
     return _FAILURE;
   }
   printf("\e[1;38;5;82;4ma = %g\tb = %g\tc = %g\e[0m\n\n", coefs[max_pow - 2], coefs[max_pow - 1], coefs[max_pow]);
@@ -128,7 +142,7 @@ void      print_solutions(int max_pow, double *coefs) {
   else if (delta == 0) {
     char *X1 = natural_sqrt_root_3(coefs[max_pow - 2],coefs[max_pow - 1]);
     printf("\e[1;38;5;82;4mX1 = %s\e[0m\n\n", X1);
-    printf("The equation of the curve is:\n\n\e[1;38;5;82;4mf(x) = %g * (x - (%s))^2\e[0ma\n", coefs[max_pow - 2], X1);
+    printf("The equation of the curve is:\n\n\e[1;38;5;82;4mf(x) = %g * (x - (%s))^2\e[0m\n", coefs[max_pow - 2], X1);
   }
   else {
     printf("Δ is strictly negative, the two solutions are:\n\n");
