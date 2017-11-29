@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:40:23 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/28 17:40:44 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/11/29 11:50:23 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ int  main(int ac, char **av) {
     display_error(1);
     return (0);
   }
-
   // if (check_argument(av[1]) == _FAILURE) {
-
   //     display_error(2);
   //     return (0);
   // }

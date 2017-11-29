@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:39:06 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/28 13:18:31 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/11/29 11:49:41 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ double    pgcd(int nb1, int nb2);
 char      *super_trim(char *str);
 char      *fix(char *str);
 double    get_coeff(char *equation_trimed, int degree);
-int      get_max_pow(char *equation_trimed);
-
+int       get_max_pow(char *equation_trimed);
+char      *minimize(char *str);
 #endif

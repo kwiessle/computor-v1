@@ -6,11 +6,12 @@
 #    By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/23 18:37:17 by kwiessle          #+#    #+#              #
-#    Updated: 2017/11/27 10:36:46 by kwiessle         ###   ########.fr        #
+#    Updated: 2017/11/28 15:16:07 by kwiessle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= computor
+LOGIN= ZDTEAM
 
 SRCS= src/main.c \
 			src/error.c \
@@ -25,16 +26,17 @@ FLAGS= -Wall -Wextra -Werror
 $(NAME):	$(OBJS)
 	@make -C libft/
 	@gcc -o $(NAME) $(OBJS) $(LIBS)
+	@echo "\033[38;5;79m  [$(NAME)]	Compiled."
 	@echo "\033[34m"
-	@echo "  MMMºººAMV '7MMºººYb.   '7MMºººMq. "
+	@echo "\033[38;5;84m  MMMºººAMV '7MMºººYb.   '7MMºººMq. "
 	@echo "  M'   AMV    MM    'Yb.   MM   'MM."
-	@echo "  '   AMV     MM     'Mb   MM   ,M9 "
+	@echo "\033[38;5;85m  '   AMV     MM     'Mb   MM   ,M9 "
 	@echo "     AMV      MM      MM   MMmmdM9  "
-	@echo "    AMV   ,   MM     ,MP   MM"
+	@echo "\033[38;5;86m    AMV   ,   MM     ,MP   MM"
 	@echo "   AMV   ,M   MM    ,dP'   MM"
-	@echo "  AMVmmmmMM .JMMmmmdP'   .JMML. "
-	@echo "\033[37m"
-	@echo " [ZDTEAM]                    [2018]"
+	@echo "\033[38;5;87m  AMVmmmmMM .JMMmmmdP'   .JMML. "
+	@echo ""
+	@echo "\033[38;5;7m [2018]                    [${LOGIN}]"
 	@echo ""
 
 $(OBJS): %.o: %.c
@@ -45,12 +47,12 @@ all:	$(NAME)
 clean:
 	@make -C libft/ clean
 	@rm -f $(OBJS)
-	@echo "\033[32mall $(NAME)_files.o are deleted\033[0m"
+	@echo "\033[38;5;174m  [$(NAME)]	Objects destroyed.\033[0m"
 
 fclean:	clean
 	@rm -f $(NAME)
 	@make -C libft/ fclean
-	@echo "\033[33m$(NAME) is deleted\033[0m"
+	@echo "\033[38;5;174m  [$(NAME)]	Binary removed.\033[0m"
 
 re:		fclean all
 
