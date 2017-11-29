@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 18:04:44 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/29 13:40:22 by kwiessle         ###   ########.fr       */
+/*   Updated: 2017/11/29 14:36:22 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,27 +193,23 @@ static double get_nat_coeff(char **left, char **right) {
   return (coeff);
 }
 
-void  print_tab(char *name, char **tab) {
-  int   i = 0;
-  printf("\n\n%s\n\n", name);
-  while (tab[i]) {
-    printf("%s\n", tab[i]);
-    i++;
-  }
-}
 int   get_max_pow(char *equation_trimed) {
   char *tmp = equation_trimed;
   int i = 0;
   int max_pow = 0;
   char *tmp2;
-  while((tmp = ft_strchr(tmp, '^')) != NULL) {
-    tmp++;
-    tmp2 = ft_strdup(tmp);
-    while(tmp2[i] && (tmp2[i] != '-' && tmp2[i] != '+' && tmp2[i] != '=')) {
-      i++;
+  while((tmp = ft_strchr(tmp, 'X')) != NULL && tmp++) {
+    if (tmp[0] == '^' && tmp++) {
+      tmp2 = ft_strdup(tmp);
+      while(tmp2[i] && (tmp2[i] != '-' && tmp2[i] != '+' && tmp2[i] != '=' && tmp2[i] != '#')) {
+        i++;
+      }
+      tmp2[i] = '\0';
+      max_pow = max_pow < ft_atoi(tmp2) ? ft_atoi(tmp2) : max_pow;
     }
-    tmp2[i] = '\0';
-    max_pow = max_pow < ft_atoi(tmp2) ? ft_atoi(tmp2) : max_pow;
+    else if (tmp[0] != '^' || tmp[0] == '#') {
+      max_pow = max_pow < 1 ? 1 : max_pow;
+    }
   }
   return(max_pow);
 }
@@ -231,13 +227,9 @@ double   get_coeff(char *equation_trimed, int degree) {
   } else {
     equation = ft_strdup(equation_trimed);
   }
-  // printf("Looking for %d degree.\n", degree);
-  // printf("equation : %s\n", equation);
   sides = ft_strsplit(equation, '=');
   left = ft_strsplit(sides[0],' ');
   right = ft_strsplit(sides[1], ' ');
-  // print_tab("LEFT  ->", left);
-  // print_tab("RIGHT  ->", right);
   if (degree >= 2) {
     a = get_high_coeff(left, right, str_degree);
   } else if (degree == 1) {

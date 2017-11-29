@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:39:06 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/29 11:49:41 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/11/29 14:26:21 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,12 @@ char      *fix(char *str);
 double    get_coeff(char *equation_trimed, int degree);
 int       get_max_pow(char *equation_trimed);
 char      *minimize(char *str);
+/* PRINT */
+
+void      print_discriminent(double a, double b, double c);
+void      print_natural_sqrt(double a, double b, double delta, char sign);
+void      print_one_sqrt(double a, double b);
+void      print_complex_sqrt(double a, double b, double delta, char sign);
+void      print_reduced_form(int max_pow, double *coefs);
+int       print_exceptions(int max_pow, double *coefs);
 #endif

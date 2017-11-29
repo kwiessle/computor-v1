@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 21:39:32 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/29 11:50:08 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/11/29 13:58:42 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,7 @@ double ft_double_abs(double n)
 }
 
 double  get_discriminent(double a, double b, double c) {
-  printf("To calculate the discriminent you need to resolve\n\n");
-  printf("\e[1;38;5;130mΔ = b^2 - 4 * a * c\e[0m\n\nWhere a, b, c are respectively the coefficent of the degree 2, 1, 0 so:\n\n");
-  printf("Δ = %g^2 - 4 * %g * %g\n", b, a, c);
-  printf("Δ = %g^2 - %g\n", b, 4 * a * c);
-  printf("Δ = %g - %g\n", b * b, 4 * a * c);
-  printf("\e[1;38;5;82;4mΔ = %g\e[0m\n\n", b * b - 4 * (a * c));
+  print_discriminent(a, b, c);
   return (b * b - 4 * (a * c ));
 }
 
@@ -66,10 +61,7 @@ char  *natural_sqrt_root(double a, double b, double delta, char sign) {
   else {
     asprintf(&root, "%g/%g", dividend / _pgcd, divisor / _pgcd);
   }
-  printf("\e[1;38;5;130mX%c = (-b %c √Δ) / (2 * a)\e[0m\n", sign == '+' ? '1' : '2', sign);
-  printf("X%c = (-(%g) %c √%g) / (2 * (%g))\n", sign == '+' ? '1' : '2', b, sign, delta, a);
-  printf("X%c = (-(%g) %c %g) / %g\n", sign == '+' ? '1' : '2', b, sign, ft_sqrt(delta), divisor);
-  printf("X%c =  %g / %g\n\n", sign == '+' ? '1' : '2',dividend, divisor);
+  print_natural_sqrt(a, b, delta, sign);
   return (root);
 }
 
@@ -82,9 +74,7 @@ char  *natural_sqrt_root_3(double a, double b) {
   else {
     asprintf(&root, "%g/%g", -b / _pgcd, (2 * a) / _pgcd);
   }
-  printf("\e[1;38;5;130mX1 = -b / (2 * a)\e[0m\n");
-  printf("X1 = -(%g) / (2 * (%g))\n", b, a);
-  printf("X1 = %g / %g\n", -b, 2 * a);
+  print_one_sqrt(a, b);
   return root;
 }
 
@@ -95,7 +85,7 @@ static char *complex_sqrt_R(double a, double b) {
     asprintf(&real, "%g", -b / (2 * a));
   }
   else {
-    asprintf(&real, "%g/%g", -b / _pgcd, (2 * a) / _pgcd);
+    asprintf(&real, "%g/%g", (2 * a) / _pgcd  <0 ? -(-b / _pgcd) : -b / _pgcd, ft_double_abs((2 * a) / _pgcd));
   }
   return real;
 }
@@ -126,10 +116,7 @@ char *complex_sqrt_root(double a, double b, double delta, char sign) {
   char  *real = complex_sqrt_R(a, b);
   char  *ireal = complex_sqrt_I(a,sqrt_delta, sign);
   asprintf(&root, "%s %si", real, ireal);
-  printf("\e[1;38;5;130mX%c = (-b %c i√(-Δ)) / (2 * a)\e[0m\n", sign == '+' ? '1' : '2', sign);
-  printf("X%c = (-(%g) %c i√-(%g)) / (2 * (%g))\n", sign == '+' ? '1' : '2', b, sign, delta, a);
-  printf("X%c = (-(%g) %c %gi) / %g\n", sign == '+' ? '1' : '2', b, sign, ft_sqrt(-delta), 2 * a);
-  printf("X%c =  %g / %g %c %g/%gi\n\n", sign == '+' ? '1' : '2', -b, 2 * a, sign,  ft_sqrt(-delta), 2 * a);
+  print_complex_sqrt(a, b, delta, sign);
   return (root);
   return root;
 }

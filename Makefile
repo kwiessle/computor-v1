@@ -6,7 +6,7 @@
 #    By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/23 18:37:17 by kwiessle          #+#    #+#              #
-#    Updated: 2017/11/28 15:16:07 by kwiessle         ###   ########.fr        #
+#    Updated: 2017/11/29 13:58:55 by vquesnel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ LOGIN= ZDTEAM
 SRCS= src/main.c \
 			src/error.c \
 			src/parser.c \
-			src/math.c
+			src/math.c \
+			src/print.c
 
 OBJS= $(SRCS:.c=.o)
 INCLUDES= -I libft/includes -I includes
