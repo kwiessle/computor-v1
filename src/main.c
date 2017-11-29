@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:40:23 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/29 14:36:22 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/11/29 14:50:04 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,6 @@ int  main(int ac, char **av) {
     if ( print_exceptions(max_pow, coefs) == _FAILURE ) {
       return (0);
     }
-    double delta = get_discriminent(coefs[max_pow - 2], coefs[max_pow - 1], coefs[max_pow]);
-    if (delta > 0) {
-      printf("Δ is strictly positive, the two solutions are:\n\n");
-      printf("\e[1;38;5;82;4mX1 = %s\e[0m\n\n", natural_sqrt_root(coefs[max_pow - 2],coefs[max_pow - 1], delta, '+'));
-      printf("\e[1;38;5;82;4mX2 = %s\e[0m\n", natural_sqrt_root(coefs[max_pow - 2],coefs[max_pow - 1], delta, '-'));
-    }
-    else if (delta == 0) {
-      printf("Δ is equal to zero, the unique solution is:\n\n");
-      printf("\e[1;38;5;82;4mX1 = %s\e[0m\n", natural_sqrt_root_3(coefs[max_pow - 2],coefs[max_pow - 1]));
-    }
-    else {
-      printf("Δ is strictly negative, the two solutions are:\n\n");
-      printf("\e[1;38;5;82;4mX1 = %s\e[0m\n\n", complex_sqrt_root(coefs[max_pow - 2],coefs[max_pow - 1], delta, '+'));
-      printf("\e[1;38;5;82;4mX2 = %s\e[0m\n", complex_sqrt_root(coefs[max_pow - 2],coefs[max_pow - 1], delta, '-'));
-    }
+    print_solutions(max_pow, coefs);
     return (0);
 }

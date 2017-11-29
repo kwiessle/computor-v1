@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 18:04:44 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/29 15:54:19 by kwiessle         ###   ########.fr       */
+/*   Updated: 2017/11/29 17:41:20 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static double high_loop(char **side, char *degree) {
   return (coeff);
 }
 
-static double low_loop(char **side) {
+static double   get_low_coeff(char **left, char **right) {
   int     i = 0;
   double  coeff = 0.0;
   while (side[i]) {
