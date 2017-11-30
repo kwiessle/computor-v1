@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   define.h                                           :+:      :+:    :+:   */
+/*   graph.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/23 19:23:36 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/30 18:13:19 by kwiessle         ###   ########.fr       */
+/*   Created: 2017/11/30 18:12:11 by kwiessle          #+#    #+#             */
+/*   Updated: 2017/11/30 18:27:47 by kwiessle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINE_H
-# define DEFINE_H
+#include "computor.h"
 
-# define _SUCCESS 1
-# define _FAILURE -1
-# define _X_MAX 500
-# define _Y_MAX 500
-# define _PROG_NAME "Computor - Grapher"
-#endif
+t_env   *new_env(void) {
+  t_env   *env;
+  if (!(env = (t_env *)malloc(sizeof(t_env))))
+    return (NULL);
+  env->mlx = mlx_init();
+  env->window = mlx_new_window(env->mlx, _X_MAX, _Y_MAX, _PROG_NAME);
+  env->a = 0.0;
+  env->b = 0.0;
+  env->c = 0.0;
+  env->delta = 0.0;
+  return(env);
+}

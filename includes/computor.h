@@ -6,18 +6,35 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:39:06 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/04 10:20:28 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/04 11:11:17 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COMPUTOR_H
 # define COMPUTOR_H
 
+/* LIBS */
+
 # include "define.h"
 # include "libft.h"
 # include <string.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <mlx.h>
+
+/* GRAPHER */
+
+typedef struct      s_env
+{
+  void      *mlx;
+  void      *window;
+  double    a;
+  double    b;
+  double    c;
+  double    delta;
+}                   t_env;
+
+t_env     *new_env(void);
 
 /* ERROR */
 
