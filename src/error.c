@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:13:14 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/30 13:11:54 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/04 11:13:49 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void   display_error(short e_type) {
       break;
     case 3:
       printf("Equation wrong format\n");
+      break;
+    case 4:
+      printf("Unknown option flag. (Must be --flagname)\n");
       break;
     default:
       printf("Unknonw ERROR_TYPE\n");
