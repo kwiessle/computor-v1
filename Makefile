@@ -6,12 +6,12 @@
 #    By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/23 18:37:17 by kwiessle          #+#    #+#              #
-#    Updated: 2017/12/04 11:11:17 by vquesnel         ###   ########.fr        #
+#    Updated: 2017/12/04 11:12:30 by vquesnel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= computor
-LOGIN= ZDTEAM
+LOGIN= COME_GARIN
 
 SRCS= src/main.c \
 			src/error.c \

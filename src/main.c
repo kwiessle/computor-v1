@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:40:23 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/04 11:11:17 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/04 11:12:30 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int  main(int ac, char **av) {
   t_env *env = new_env();
-  if (ac != 2) {
-    display_error(1);
-    return (0);
-  }
+  // if (ac < 2  ac > 3) {
+  //   display_error(1);
+  //   return (0);
+  // }
   // if (check_argument(av[1]) == _FAILURE) {
   //     display_error(2);
   //     return (0);
   // }
-
+  (void)ac;
   printf("%lf\n", env->a);
   if (check_format(av[1]) == _FAILURE) {
       display_error(3);
@@ -45,10 +45,14 @@ int  main(int ac, char **av) {
     }
     print_reduced_form(max_pow, coefs);
     if ( print_exceptions(max_pow, coefs) == _FAILURE ) {
-      return (0);
+      // return (0);
     }
     print_solutions(max_pow, coefs);
   }
+  if (ft_strcmp(av[3], "--grapher") == 0) {
+    init_graph(env);
+    mlx_hook(env->window, 2, 3, key_events, env);
     mlx_loop(env->mlx);
-    return (0);
+  }
+  return (0);
 }
