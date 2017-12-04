@@ -6,11 +6,12 @@
 /*   By: vquesnel <vquesnel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 13:55:13 by vquesnel          #+#    #+#             */
-/*   Updated: 2017/11/30 13:09:34 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/04 10:20:28 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "computor.h"
+
 void      print_discriminent(double a, double b, double c) {
   printf("To calculate the discriminent you need to resolve\n\n");
   printf("\e[1;38;5;130mΔ = b^2 - 4 * a * c\e[0m\n\n");
@@ -20,6 +21,7 @@ void      print_discriminent(double a, double b, double c) {
   printf("Δ = %g - %g\n", b * b, 4 * a * c);
   printf("\e[1;38;5;82;4mΔ = %g\e[0m\n\n", b * b - 4 * (a * c));
 }
+
 void      print_natural_sqrt(double a, double b, double delta, char sign) {
   double dividend = sign == '+' ? -b + ft_sqrt(delta) : -b - ft_sqrt(delta);
   double divisor = 2 * a;
@@ -29,12 +31,14 @@ void      print_natural_sqrt(double a, double b, double delta, char sign) {
   printf("X%c = (-(%g) %c %g) / %g\n", sign == '+' ? '1' : '2', b, sign, ft_sqrt(delta), divisor);
   printf("X%c =  %g / %g\n", sign == '+' ? '1' : '2',dividend, divisor);
 }
+
 void      print_one_sqrt(double a, double b){
   printf("Δ is equal to zero, the unique solution is:\n\n");
   printf("\e[1;38;5;130mX1 = -b / (2 * a)\e[0m\n");
   printf("X1 = -(%g) / (2 * (%g))\n", b, a);
   printf("X1 = %g / %g\n", -b, 2 * a);
 }
+
 void      print_complex_sqrt(double a, double b, double delta, char sign){
   printf("\e[1;38;5;130mX%c = (-b %c i√(-Δ)) / (2 * a)\e[0m\n", sign == '+' ? '1' : '2', sign);
   printf("X%c = (-(%g) %c i√-(%g)) / (2 * (%g))\n", sign == '+' ? '1' : '2', b, sign, delta, a);
