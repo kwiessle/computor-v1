@@ -6,7 +6,7 @@
 #    By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/23 18:37:17 by kwiessle          #+#    #+#              #
-#    Updated: 2017/11/29 13:58:55 by vquesnel         ###   ########.fr        #
+#    Updated: 2017/12/04 10:06:45 by vquesnel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ SRCS= src/main.c \
 			src/error.c \
 			src/parser.c \
 			src/math.c \
-			src/print.c
+			src/print.c \
+			src/test.c \
 
 OBJS= $(SRCS:.c=.o)
 INCLUDES= -I libft/includes -I includes

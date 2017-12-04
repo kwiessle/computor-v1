@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:13:14 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/27 17:30:58 by kwiessle         ###   ########.fr       */
+/*   Updated: 2017/11/30 13:11:54 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ short   check_format(char *equation) {
   int     verif = 0;
   while (equation[i]) {
     tmp = allowed_format(equation[i]);
-    printf("%c    ->    %d\n", equation[i], tmp);
     if (tmp == _FAILURE)
       return (_FAILURE);
     if (equation[i] == '=')

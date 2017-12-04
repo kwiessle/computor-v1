@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:39:06 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/29 14:51:43 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/04 10:20:28 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,5 @@ void      print_one_sqrt(double a, double b);
 void      print_complex_sqrt(double a, double b, double delta, char sign);
 void      print_reduced_form(int max_pow, double *coefs);
 int       print_exceptions(int max_pow, double *coefs);
-void      print_solutions(int max_pow, double *coefs);
+void      print_solutions(double *coefs);
 #endif
