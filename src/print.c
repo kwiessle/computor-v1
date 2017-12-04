@@ -6,7 +6,7 @@
 /*   By: vquesnel <vquesnel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 13:55:13 by vquesnel          #+#    #+#             */
-/*   Updated: 2017/12/04 10:20:28 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/04 16:29:42 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,19 +87,19 @@ int      print_exceptions(int max_pow, double *coefs) {
   if (max_pow >= 3) {
       printf("\e[1;38;5;82;4ma = %g\tb = %g\tc = %g\e[0m\n\n", coefs[2], coefs[1], coefs[0]);
       printf("\e[1;38;5;160;4mThe polynomial degree is stricly greater than 2, I can't solve.\e[0m\n");
-      return _FAILURE;
+      return -5;
   }
   if (max_pow == 0 ) {
       printf("\e[1;38;5;82;4ma = 0\tb = 0\tc = %g\e[0m\n\n",coefs[max_pow]);
       printf("\e[1;38;5;%s\e[0m\n", coefs[max_pow] == 0 ? "82;4mAll numbers are solutions" : "160;4mThis isn't a valid equation");
-      return _FAILURE;
+      return -4;
   }
   if (max_pow == 1 && coefs[1] == 0) {
     printf("\e[1;38;5;82;4ma = 0\tb = %g\tc = %g\e[0m\n\n", coefs[1], coefs[0]);
     coefs[0] != 0 ?
       printf("b = 0 and c != 0 so:\n\n\e[1;38;5;160;4mThis isnt't a valid equation\e[0m\n") :
       printf("b = 0 and c = 0 so:\n\n\e[1;38;5;82;4mAll numbers are solution\e[0m\n");
-      return _FAILURE;
+      return -3;
   }
   if (coefs[2] == 0 || max_pow == 1) {
     printf("\e[1;38;5;82;4ma = 0\tb = %g\tc = %g\e[0m\n\n", coefs[1], coefs[0]);
@@ -113,7 +113,7 @@ int      print_exceptions(int max_pow, double *coefs) {
       printf("\e[1;38;5;82;4mX1 = %s%g/%g\e[0m\n", divide < 0 ? "- " : "",
         ft_double_abs(-coefs[0] / _pgcd),
         ft_double_abs(coefs[1] / _pgcd));
-    return _FAILURE;
+    return -2;
   }
   printf("\e[1;38;5;82;4ma = %g\tb = %g\tc = %g\e[0m\n\n", coefs[2], coefs[1], coefs[0]);
   return _SUCCESS;

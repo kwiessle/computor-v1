@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:39:06 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/04 11:14:02 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/04 16:17:26 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct      s_env
   char      *equation;
 }                   t_env;
 
-t_env     *new_env(double a, double b, double c);
+t_env     *init_env(double a, double b, double c);
 int       key_events(int keycode, t_env *env);
 void      init_graph(t_env *env);
 long long       polynomial(int x, double a, double b, double c);
@@ -62,9 +62,10 @@ double    pgcd(int nb1, int nb2);
 
 char      *super_trim(char *str);
 char      *fix(char *str);
-double    get_coeff(char *equation_trimed, int degree);
+double    *get_coeff(char *equation_trimed, int degree);
 int       get_max_pow(char *equation_trimed);
 char      *minimize(char *str);
+void free_tab(void **tab);
 /* PRINT */
 
 void      print_discriminent(double a, double b, double c);

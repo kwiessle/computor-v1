@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:23:36 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/03 19:32:44 by kwiessle         ###   ########.fr       */
+/*   Updated: 2017/12/04 16:35:07 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 
 # define _SUCCESS 1
 # define _FAILURE -1
-# define _X_MAX 500
-# define _Y_MAX 500
+# define _X_MAX 1000
+# define _Y_MAX 1000
 # define _X_ORIGIN _X_MAX / 2
 # define _Y_ORIGIN _Y_MAX / 2
-# define _X_ZOOM 3
-# define _Y_ZOOM 1
-# define _P_ITER 10
+# define _X_ZOOM 10
+# define _Y_ZOOM 10
+# define _P_ITER 1
 # define _PROG_NAME "Computor - Grapher"
 # define _K_SPACE 49
 # define _K_ESC 53
