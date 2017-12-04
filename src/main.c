@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:40:23 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/04 11:14:02 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/04 11:14:20 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int  main(int ac, char **av) {
     print_reduced_form(max_pow, coefs);
     print_solutions(max_pow, coefs);
     if (av[2] && av[2] && ft_strcmp(av[2], "--grapher") == 0) {
-      env = new_env(get_coeff(equation_trimed, 2), get_coeff(equation_trimed, 1), get_coeff(equation_trimed, 0));
+      env = new_env(coefs[2], coefs[1], coefs[0]);
       init_graph(env);
       mlx_hook(env->window, 2, 3, key_events, env);
       mlx_loop(env->mlx);
