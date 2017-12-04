@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:40:23 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/04 11:14:20 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/04 11:47:31 by kwiessle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int  main(int ac, char **av) {
       max_pow--;
     }
     print_reduced_form(max_pow, coefs);
-    print_solutions(max_pow, coefs);
+    print_solutions(coefs);
     if (av[2] && av[2] && ft_strcmp(av[2], "--grapher") == 0) {
       env = new_env(coefs[2], coefs[1], coefs[0]);
       init_graph(env);
