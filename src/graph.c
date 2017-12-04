@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 18:12:11 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/01 18:43:59 by kwiessle         ###   ########.fr       */
+/*   Updated: 2017/12/03 19:32:12 by kwiessle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,17 @@ t_env   *new_env(double a, double b, double c) {
     return (NULL);
   env->mlx = mlx_init();
   env->window = mlx_new_window(env->mlx, _X_MAX, _Y_MAX, _PROG_NAME);
-  env->a = a;
-  env->b = b;
-  env->c = c;
-  asprintf(&equation_str, "y = %gx^2 + %gx + %g", env->a, env->b, env->c);
+  env->a = a / _P_ITER;
+  env->b = b / _P_ITER;
+  env->c = c / _P_ITER;
+  asprintf(&equation_str, "y = %gx^2 + %gx + %g", env->a * _P_ITER, env->b * _P_ITER, env->c * _P_ITER);
   env->equation = equation_str;
   return(env);
 }
 
 int   key_events(int keycode, t_env *env) {
+  (void)env;
     switch (keycode) {
-      case _K_SPACE:
-        mlx_loop(env->mlx);
-        break;
       case _K_ESC:
         exit(0);
         break;
@@ -41,9 +39,8 @@ int   key_events(int keycode, t_env *env) {
     return (0);
 }
 
-int   polynomial(int x, double a, double b, double c) {
-  return ((int)(a * (x * x) + (b * x) + c));
-}
+long long   polynomial(int x, double a, double b, double c) { return ((long
+long)(a * (x * x) + (b * x) + c)); }
 
 
 void  init_graph(t_env *env) {
@@ -68,6 +65,9 @@ void   draw_curve(t_env *env) {
     y = _Y_ORIGIN + (polynomial(x, env->a, env->b, env->c) * _Y_ZOOM);
     if (y >= 0 && y <= _Y_MAX ) {
       mlx_pixel_put(env->mlx, env->window, _X_ORIGIN + (x * _X_ZOOM), y, _C_NEG);
+      if (y == _Y_ORIGIN) {
+        mlx_pixel_put(env->mlx, env->window, _X_ORIGIN + (x * _X_ZOOM), y, _C_POS);
+      }
     }
     x++;
   }

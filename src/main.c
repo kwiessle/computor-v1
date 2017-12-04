@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:40:23 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/04 11:13:49 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/04 11:14:02 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,6 @@
 
 int  main(int ac, char **av) {
   t_env *env;
-  // if (ac < 2  ac > 3) {
-  //   display_error(1);
-  //   return (0);
-  // }
-  // if (check_argument(av[1]) == _FAILURE) {
-  //     display_error(2);
-  //     return (0);
-  // }
   (void)ac;
   if (check_format(av[1]) == _FAILURE) {
       display_error(3);
@@ -43,11 +35,8 @@ int  main(int ac, char **av) {
       max_pow--;
     }
     print_reduced_form(max_pow, coefs);
-    if ( print_exceptions(max_pow, coefs) == _FAILURE ) {
-      // return (0);
-    }
     print_solutions(max_pow, coefs);
-    if ( av[2] && av[2] && ft_strcmp(av[2], "--grapher") == 0) {
+    if (av[2] && av[2] && ft_strcmp(av[2], "--grapher") == 0) {
       env = new_env(get_coeff(equation_trimed, 2), get_coeff(equation_trimed, 1), get_coeff(equation_trimed, 0));
       init_graph(env);
       mlx_hook(env->window, 2, 3, key_events, env);
