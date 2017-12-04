@@ -6,12 +6,12 @@
 #    By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/23 18:37:17 by kwiessle          #+#    #+#              #
-#    Updated: 2017/12/04 10:06:45 by vquesnel         ###   ########.fr        #
+#    Updated: 2017/12/04 11:12:30 by vquesnel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= computor
-LOGIN= ZDTEAM
+LOGIN= COME_GARIN
 
 SRCS= src/main.c \
 			src/error.c \
@@ -19,15 +19,18 @@ SRCS= src/main.c \
 			src/math.c \
 			src/print.c \
 			src/test.c \
+			src/graph.c
 
 OBJS= $(SRCS:.c=.o)
-INCLUDES= -I libft/includes -I includes
-LIBS= -L libft/ -lft
+INCLUDES= -I libft/includes -I includes -I mlx/
+LIBS= -L libft/ -lft -L mlx/ -lmlx -lm
 FLAGS= -Wall -Wextra -Werror
+FRAMEWORK= -framework AppKit -framework OpenGL
 
 $(NAME):	$(OBJS)
 	@make -C libft/
-	@gcc -o $(NAME) $(OBJS) $(LIBS)
+	@make -C mlx/
+	@gcc -o $(NAME) $(OBJS) $(LIBS) $(FRAMEWORK)
 	@echo "\033[38;5;79m  [$(NAME)]	Compiled."
 	@echo "\033[34m"
 	@echo "\033[38;5;84m  MMMºººAMV '7MMºººYb.   '7MMºººMq. "
@@ -48,6 +51,7 @@ all:	$(NAME)
 
 clean:
 	@make -C libft/ clean
+	@make -C mlx/ clean
 	@rm -f $(OBJS)
 	@echo "\033[38;5;174m  [$(NAME)]	Objects destroyed.\033[0m"
 
