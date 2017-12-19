@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:13:14 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/19 14:47:24 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/19 15:00:30 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ short   allowed_degree(char degree) {
 
 short   allowed_format(char c) {
   short   i = 0;
-  char    *set = "0123456789 .=+-*/X^\0";
+  char    *set = "0123456789 .=+-*X^\0";
   while (set[i]) {
     if (set[i] == c)
       return (_SUCCESS);
