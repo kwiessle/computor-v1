@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 18:12:11 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/19 13:31:57 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/19 13:48:02 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,24 @@ void  init_graph(t_env *env) {
 
 void  draw_roots(t_env *env) {
   int y = -10;
-  if (env->delta == 0) {
-    int x = (int)(-(env->b) / (2 * env->a));
+
+  if (env->a == 0) {
+	  double x = -env->c / env->b;
+	  while (y <= 10) {
+		 mlx_pixel_put(env->mlx, env->window, _X_ORIGIN + (x * _X_ZOOM), _Y_ORIGIN - y, _C_NEG);
+		 y++;
+	  }
+  }
+  else if (env->delta == 0) {
+    double x = -(env->b) / (2 * env->a);
     while (y <= 10) {
       mlx_pixel_put(env->mlx, env->window, _X_ORIGIN + (x * _X_ZOOM), _Y_ORIGIN - y, _C_NEG);
       y++;
     }
   }
-  if (env->delta > 0) {
-    int x1 = (int)(-(env->b - ft_sqrt(env->delta)) / (2 * env->a));
-    int x2 = (int)(-(env->b + ft_sqrt(env->delta)) / (2 * env->a));
+  else if (env->delta > 0) {
+    double x1 = -(env->b - ft_sqrt(env->delta)) / (2 * env->a);
+    double x2 = -(env->b + ft_sqrt(env->delta)) / (2 * env->a);
     while (y <= 20) {
       mlx_pixel_put(env->mlx, env->window, _X_ORIGIN + (x1 * _X_ZOOM), _Y_ORIGIN - y , _C_NEG);
       mlx_pixel_put(env->mlx, env->window, _X_ORIGIN + (x2 * _X_ZOOM), _Y_ORIGIN - y , _C_NEG);
