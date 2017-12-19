@@ -6,7 +6,7 @@
 /*   By: vquesnel <vquesnel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 13:55:13 by vquesnel          #+#    #+#             */
-/*   Updated: 2017/12/04 16:29:42 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/19 11:22:38 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,15 +124,19 @@ void      print_solutions(double *coefs) {
   if (delta > 0) {
     printf("Δ is strictly positive, the two solutions are:\n\n");
     char *X1 = natural_sqrt_root(coefs[2], coefs[1], delta, '+');
+    printf("%s\n", X1);
     printf("\e[1;38;5;82;4mX1 = %s\e[0m\n\n", X1);
     char *X2 = natural_sqrt_root(coefs[2], coefs[1], delta, '-');
     printf("\e[1;38;5;82;4mX2 = %s\e[0m\n\n", X2);
     printf("The equation of the curve is:\n\n\e[1;38;5;82;4mf(x) = %g * (x - (%s)) * (x - (%s))\e[0m\n", coefs[2], X1, X2);
+    free(X1);
+    free(X2);
   }
   else if (delta == 0) {
     char *X1 = natural_sqrt_root_3(coefs[2],coefs[1]);
     printf("\e[1;38;5;82;4mX1 = %s\e[0m\n\n", X1);
     printf("The equation of the curve is:\n\n\e[1;38;5;82;4mf(x) = %g * (x - (%s))^2\e[0m\n", coefs[2], X1);
+    free(X1);
   }
   else {
     printf("Δ is strictly negative, the two solutions are:\n\n");
@@ -141,5 +145,7 @@ void      print_solutions(double *coefs) {
     char *X2= complex_sqrt_root(coefs[2],coefs[1], delta, '-');
     printf("\e[1;38;5;82;4mX2 = %s\e[0m\n\n", X2);
     printf("The equation of the curve is:\n\n\e[1;38;5;82;4mf(x) = %g * (x - (%s)) * (x - (%s))\e[0m\n", coefs[2], X1, X2);
+    free(X1);
+    free(X2);
   }
 }

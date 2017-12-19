@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 18:12:11 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/04 16:25:10 by kwiessle         ###   ########.fr       */
+/*   Updated: 2017/12/19 11:09:42 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static t_env	*new_env(void){
 	env->a = 0;
 	env->b = 0;
 	env->c = 0;
+	env->delta = 0;
 	env->equation = NULL;
 	return (env);
 }
@@ -36,8 +37,7 @@ t_env   *init_env(double a, double b, double c) {
   env->a = a / _P_ITER;
   env->b = b / _P_ITER;
   env->c = c / _P_ITER;
-  env->delta = get_discriminent(a, b, c);
-  env->equation = equation_str;
+  env->delta = (b * b - 4 * (a * c ));
   asprintf(&env->equation, "y = %gx^2 + %gx + %g",a ,b, c);
   return(env);
 }
@@ -79,7 +79,6 @@ void  init_graph(t_env *env) {
 
 void  draw_roots(t_env *env) {
   int y = -10;
-  printf("%lf\n", env->delta);
   if (env->delta == 0) {
     int x = (int)((-env->b) / (2 * env->a));
     while (y <= 10) {
