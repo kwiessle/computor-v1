@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:39:06 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/04 16:17:26 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/19 13:30:49 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct      s_env
 t_env     *init_env(double a, double b, double c);
 int       key_events(int keycode, t_env *env);
 void      init_graph(t_env *env);
-long      polynomial(int x, double a, double b, double c);
+float     polynomial(double x, double a, double b, double c);
 void      draw_curve(t_env *env);
 void      draw_roots(t_env *env);
 /* ERROR */

@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 18:04:44 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/04 16:19:08 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/19 13:34:58 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,9 +157,15 @@ static double nat_loop(char **side) {
       free(aCoef);
     }
     else if (side[i][0] == 'X' && ft_strcmp("X^0", side[i]) == 0) {
-      aCoef = ft_strjoin(side[i -3], side[i -2]);
-      coeff = coeff + (atof(aCoef));
-      free(aCoef);
+      if (side[i - 1][0] == '+') {
+        coeff = coeff + 1.0;
+      } else if (side[i - 1][0] == '-') {
+        coeff = coeff - 1.0;
+      } else {
+        aCoef = ft_strjoin(side[i - 3], side[i -2]);
+        coeff = coeff + (atof(aCoef));
+        free(aCoef);
+      }
     }
     i++;
   }

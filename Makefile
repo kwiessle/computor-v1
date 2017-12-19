@@ -6,25 +6,24 @@
 #    By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/23 18:37:17 by kwiessle          #+#    #+#              #
-#    Updated: 2017/12/04 16:42:17 by vquesnel         ###   ########.fr        #
+#    Updated: 2017/12/19 11:35:11 by vquesnel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= computor
-LOGIN= COME_GARIN
+LOGIN= kwiessle/vquesnel
 
 SRCS= src/main.c \
 			src/error.c \
 			src/parser.c \
 			src/math.c \
 			src/print.c \
-			src/test.c \
-			src/graph.c
+			src/graph.c \
 
 OBJS= $(SRCS:.c=.o)
 INCLUDES= -I libft/includes -I includes -I mlx/
 LIBS= -L libft/ -lft -L mlx/ -lmlx -lm
-FLAGS= -Wall -Wextra -Werror 
+FLAGS= -Wall -Wextra -Werror
 FRAMEWORK= -framework AppKit -framework OpenGL
 
 $(NAME):	$(OBJS)
