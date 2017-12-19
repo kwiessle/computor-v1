@@ -38,9 +38,9 @@ typedef struct      s_env
 t_env     *init_env(double a, double b, double c);
 int       key_events(int keycode, t_env *env);
 void      init_graph(t_env *env);
-long long       polynomial(int x, double a, double b, double c);
+long      polynomial(int x, double a, double b, double c);
 void      draw_curve(t_env *env);
-
+void      draw_roots(t_env *env);
 /* ERROR */
 
 void      display_error(short e_type);
