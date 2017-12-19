@@ -12,28 +12,25 @@
 
 #include "computor.h"
 
-static t_env  *init_env(void) {
-  t_env *env;
-  if (!(env = (t_env *)malloc(sizeof(t_env))))
-    return (NULL);
-  else {
-    env->mlx = NULL;
-    env->window = NULL;
-    env->a = 0.0;
-    env->b = 0.0;
-    env->c = 0.0;
-    env->delta = 0.0;
-    env->equation = NULL;
-  }
-  return (env);
+static t_env	*new_env(void){
+	t_env	*env;
+
+	if (!(env = (t_env *)malloc(sizeof(t_env))))
+		return (NULL);
+	env->mlx = NULL;
+	env->window = NULL;
+	env->a = 0;
+	env->b = 0;
+	env->c = 0;
+	env->equation = NULL;
+	return (env);
 }
 
+t_env   *init_env(double a, double b, double c) {
+  t_env   *env;
 
-t_env   *new_env(double a, double b, double c) {
-  char    *equation_str;
-  t_env   *env = init_env();
-  asprintf(&equation_str, "y = %gx^2 + %gx + %g", a, b, c);
-
+  if (!(env = new_env()))
+  		return (NULL);
   env->mlx = mlx_init();
   env->window = mlx_new_window(env->mlx, _X_MAX, _Y_MAX, _PROG_NAME);
   env->a = a / _P_ITER;
@@ -41,6 +38,7 @@ t_env   *new_env(double a, double b, double c) {
   env->c = c / _P_ITER;
   env->delta = get_discriminent(a, b, c);
   env->equation = equation_str;
+  asprintf(&env->equation, "y = %gx^2 + %gx + %g",a ,b, c);
   return(env);
 }
 
@@ -64,11 +62,11 @@ long   polynomial(int x, double a, double b, double c) {
 void  init_graph(t_env *env) {
   int x = 0, y = 0;
   while (y <= _Y_MAX) {
-    mlx_pixel_put(env->mlx, env->window, (_Y_MAX / 2), y, _C_AXIS);
+    mlx_pixel_put(env->mlx, env->window, _Y_ORIGIN, y, _C_AXIS);
     y++;
   }
   while (x <= _X_MAX) {
-    mlx_pixel_put(env->mlx, env->window, x, (_X_MAX / 2), _C_AXIS);
+    mlx_pixel_put(env->mlx, env->window, x, _X_ORIGIN, _C_AXIS);
     x++;
   }
   mlx_string_put(env->mlx, env->window, 30, 30, _C_TXT, env->equation);
@@ -101,9 +99,9 @@ void  draw_roots(t_env *env) {
 }
 
 void   draw_curve(t_env *env) {
-  int x = -_X_MAX / 2;
-  long y = 0;
-  while (x <= _X_MAX / 2) {
+  int x = -_X_ORIGIN;
+  int y = 0;
+  while (x <= _X_ORIGIN) {
     y = _Y_ORIGIN - (polynomial(x, env->a, env->b, env->c) * _Y_ZOOM);
     if (y >= 0 && y <= _Y_MAX ) {
       mlx_pixel_put(env->mlx, env->window, _X_ORIGIN + (x * _X_ZOOM), (int)y, _C_POS);

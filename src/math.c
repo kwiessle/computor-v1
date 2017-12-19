@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 21:39:32 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/11/29 17:51:15 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/04 16:33:27 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ char  *natural_sqrt_root(double a, double b, double delta, char sign) {
     asprintf(&root, "%g/%g", dividend / _pgcd, divisor / _pgcd);
   }
   print_natural_sqrt(a, b, delta, sign);
+  free(root);
   return (root);
 }
 
@@ -75,6 +76,7 @@ char  *natural_sqrt_root_3(double a, double b) {
     asprintf(&root, "%g/%g", -b / _pgcd, (2 * a) / _pgcd);
   }
   print_one_sqrt(a, b);
+  free(root);
   return root;
 }
 
@@ -87,6 +89,7 @@ static char *complex_sqrt_R(double a, double b) {
   else {
     asprintf(&real, "%g/%g", (2 * a) / _pgcd  <0 ? -(-b / _pgcd) : -b / _pgcd, ft_double_abs((2 * a) / _pgcd));
   }
+  free(real);
   return real;
 }
 
@@ -102,6 +105,7 @@ static char *complex_sqrt_I(double a, double sqrt_delta, char sign) {
     asprintf(&ireal, "%c %g/%g", divide < 0 ? sign == '+' ? '-' : '+' : sign == '+' ? '+' : '-',
       ft_double_abs(sqrt_delta / _pgcd), ft_double_abs((2 * a) / _pgcd));
   }
+  free(ireal);
   return ireal;
 }
 
@@ -116,6 +120,7 @@ char *complex_sqrt_root(double a, double b, double delta, char sign) {
   char  *real = complex_sqrt_R(a, b);
   char  *ireal = complex_sqrt_I(a,sqrt_delta, sign);
   asprintf(&root, "%s %si", real, ireal);
+  free(root);
   print_complex_sqrt(a, b, delta, sign);
   return (root);
 }

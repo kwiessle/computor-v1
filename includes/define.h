@@ -23,7 +23,7 @@
 # define _X_ZOOM 10
 # define _Y_ZOOM 10
 # define _P_ITER 1
-# define _PROG_NAME "Computor - Grapher\0"
+# define _PROG_NAME "Computor - Grapher"
 # define _K_SPACE 49
 # define _K_ESC 53
 # define _C_GRAD 0xEDF1F4
