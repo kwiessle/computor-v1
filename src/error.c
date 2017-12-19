@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:13:14 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/04 11:13:49 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/19 14:47:24 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ short   check_argument(char *equation) {
 short   check_format(char *equation) {
   short   i = 0, tmp = 0;
   int     verif = 0;
+
+  if (ft_strlen(equation) < 3) {
+     return _FAILURE;
+  }
   while (equation[i]) {
     tmp = allowed_format(equation[i]);
     if (tmp == _FAILURE)

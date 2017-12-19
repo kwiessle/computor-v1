@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 18:12:11 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/19 13:48:02 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/19 13:49:35 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void  draw_roots(t_env *env) {
   else if (env->delta > 0) {
     double x1 = -(env->b - ft_sqrt(env->delta)) / (2 * env->a);
     double x2 = -(env->b + ft_sqrt(env->delta)) / (2 * env->a);
-    while (y <= 20) {
+    while (y <= 10) {
       mlx_pixel_put(env->mlx, env->window, _X_ORIGIN + (x1 * _X_ZOOM), _Y_ORIGIN - y , _C_NEG);
       mlx_pixel_put(env->mlx, env->window, _X_ORIGIN + (x2 * _X_ZOOM), _Y_ORIGIN - y , _C_NEG);
       y++;

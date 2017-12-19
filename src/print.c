@@ -6,7 +6,7 @@
 /*   By: vquesnel <vquesnel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 13:55:13 by vquesnel          #+#    #+#             */
-/*   Updated: 2017/12/19 11:48:10 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/19 14:02:55 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int      print_exceptions(int max_pow, double *coefs) {
   }
   if (max_pow == 0 ) {
       printf("\e[1;38;5;82;4ma = 0\tb = 0\tc = %g\e[0m\n\n",coefs[max_pow]);
-      printf("\e[1;38;5;%s\e[0m\n", coefs[max_pow] == 0 ? "82;4mAll numbers are solutions" : "160;4mThis isn't a valid equation");
+      printf("\e[1;38;5;%s\e[0m\n", coefs[max_pow] == 0 && coefs[max_pow - 1] ? "82;4mAll numbers are solutions" : "160;4mThis isn't a valid equation");
       return -4;
   }
   if (max_pow == 1 && coefs[1] == 0) {
