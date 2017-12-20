@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:13:14 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/20 16:12:22 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/20 16:32:08 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,10 @@ static short check_pow(char *clean, int i) {
     return (-1);
   }
   i++;
-  while(clean[i] && clean[i] != '+' && clean[i] != '-' && clean[i] != '=') {
+  if(!clean[i]){
+    return (-1);
+  }
+  while (clean[i] && clean[i] != '+' && clean[i] != '-' && clean[i] != '=') {
       if (clean[i] < '0' || clean[i] > '9') {
         return (-1);
       }
