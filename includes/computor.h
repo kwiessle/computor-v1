@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:39:06 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/19 13:30:49 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/20 11:32:37 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@
 
 /* GRAPHER */
 
+typedef struct		 s_img
+{
+	void			*img;
+	char			*data;
+	int				bpp;
+	int				sizeline;
+	int				endian;
+}        					t_img;
+
 typedef struct      s_env
 {
   void      *mlx;
@@ -33,6 +42,7 @@ typedef struct      s_env
   double    c;
   double    delta;
   char      *equation;
+  t_img     *img;
 }                   t_env;
 
 t_env     *init_env(double a, double b, double c);
@@ -41,6 +51,7 @@ void      init_graph(t_env *env);
 float     polynomial(double x, double a, double b, double c);
 void      draw_curve(t_env *env);
 void      draw_roots(t_env *env);
+void		  mlx_put_pixel_to_img(t_env *env, double x, double y, int color);
 /* ERROR */
 
 void      display_error(short e_type);

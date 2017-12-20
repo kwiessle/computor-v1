@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:23:36 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/19 13:52:18 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/20 11:46:12 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@
 # define _C_GRAD 0xEDF1F4
 # define _C_AXIS 0x545454
 # define _C_NEG 0x00abff
-# define _C_POS 0xff0099
+# define _C_POS 0xe4321a
 # define _C_TXT 0x00FF00
-
 
 #endif
