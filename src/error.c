@@ -6,30 +6,14 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:13:14 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/20 12:53:54 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/20 14:26:25 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "computor.h"
 
-void   display_error(short e_type) {
-  switch (e_type) {
-    case 1:
-      printf("Only one equation needed to run computor.\n");
-      break;
-    case 2:
-      printf("Too high degree. I can't solve\n");
-      break;
-    case 3:
+void   display_error() {
       printf("Equation wrong format\n");
-      break;
-    case 4:
-      printf("Unknown option flag. (Must be --flagname)\n");
-      break;
-    default:
-      printf("Unknonw ERROR_TYPE\n");
-      break;
-  }
 }
 
 short   allowed_format(char c) {
@@ -167,5 +151,6 @@ short   equation_validator(char *equation) {
       return(-1);
     i++;
   }
+  free(clean);
   return (0);
 }

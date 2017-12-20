@@ -6,7 +6,7 @@
 /*   By: vquesnel <vquesnel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 13:55:13 by vquesnel          #+#    #+#             */
-/*   Updated: 2017/12/19 14:02:55 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/20 14:22:02 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void      print_complex_sqrt(double a, double b, double delta, char sign){
 
 void      print_reduced_form(int max_pow, double *coefs) {
   int tmp_pow = max_pow;
-
   printf("The reduced form is:\n\n");
   while ( tmp_pow >= 0 ) {
     if (coefs[tmp_pow] != 0) {

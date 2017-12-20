@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:40:23 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/20 14:08:00 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/20 14:21:45 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,18 @@ static void init_mlx(double *coefs) {
   mlx_loop(env->mlx);
   free(env);
 }
+
 int  main(int ac, char **av) {
   int exceptions;
 
   if (ac == 2 || (ac == 3 && ft_strcmp(av[2], "--grapher") == 0)) {
   if (check_format(av[1]) == _FAILURE) {
-      display_error(3);
+      display_error();
       return (0);
   } else {
     char *equation_trimed = super_trim(av[1]);
     if (equation_validator(equation_trimed) == -1) {
-      display_error(3);
+      display_error();
       return (0);
     }
     int max_pow = get_max_pow(equation_trimed);
@@ -54,7 +55,9 @@ int  main(int ac, char **av) {
           return (0);
           break;
         case -2:
-          init_mlx(coefs);
+          if (av[2] && av[2] && ft_strcmp(av[2], "--grapher") == 0) {
+            init_mlx(coefs);
+          }
       }
     }
     print_solutions(coefs);
