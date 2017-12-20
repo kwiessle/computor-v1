@@ -6,7 +6,7 @@
 /*   By: vquesnel <vquesnel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 13:55:13 by vquesnel          #+#    #+#             */
-/*   Updated: 2017/12/20 14:22:02 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/20 15:32:43 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ void      print_complex_sqrt(double a, double b, double delta, char sign){
 
 void      print_reduced_form(int max_pow, double *coefs) {
   int tmp_pow = max_pow;
+  if( coefs[max_pow] == 0) {
+    return;
+  }
   printf("The reduced form is:\n\n");
   while ( tmp_pow >= 0 ) {
     if (coefs[tmp_pow] != 0) {
@@ -90,16 +93,16 @@ int      print_exceptions(int max_pow, double *coefs) {
   }
   if (max_pow == 0 ) {
       printf("\e[1;38;5;82;4ma = 0\tb = 0\tc = %g\e[0m\n\n",coefs[max_pow]);
-      printf("\e[1;38;5;%s\e[0m\n", coefs[max_pow] == 0 && coefs[max_pow - 1] ? "82;4mAll numbers are solutions" : "160;4mThis isn't a valid equation");
+      coefs[max_pow] != 0 ?
+        printf("b = 0 and c != 0 so:\n\n\e[1;38;5;160;4mThis isnt't a valid equation\e[0m\n") :
+        printf("b = 0 and c = 0 so:\n\n\e[1;38;5;82;4mAll numbers are solution\e[0m\n");
       return -4;
   }
-  if (max_pow == 1 && coefs[1] == 0) {
-    printf("\e[1;38;5;82;4ma = 0\tb = %g\tc = %g\e[0m\n\n", coefs[1], coefs[0]);
-    coefs[0] != 0 ?
-      printf("b = 0 and c != 0 so:\n\n\e[1;38;5;160;4mThis isnt't a valid equation\e[0m\n") :
-      printf("b = 0 and c = 0 so:\n\n\e[1;38;5;82;4mAll numbers are solution\e[0m\n");
-      return -3;
-  }
+  // if (max_pow == 1 && coefs[1] == 0) {
+    // printf("\e[1;38;5;82;4ma = 0\tb = %g\tc = %g\e[0m\n\n", coefs[1], coefs[0]);
+//
+      // return -3;
+  // }
   if (coefs[2] == 0 || max_pow == 1) {
     printf("\e[1;38;5;82;4ma = 0\tb = %g\tc = %g\e[0m\n\n", coefs[1], coefs[0]);
     printf("a = 0, The unique solution is:\n\n");

@@ -6,16 +6,16 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:40:23 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/20 14:21:45 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/20 15:16:36 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "computor.h"
 
-static void init_mlx(double *coefs) {
+static void init_mlx(double a, double b, double c) {
   t_env *env;
 
-  env = init_env(coefs[2], coefs[1], coefs[0]);
+  env = init_env(a, b, c);
   init_graph(env);
   mlx_put_image_to_window(env->mlx, env->window, env->img->img, 0, 0);
   mlx_string_put(env->mlx, env->window, 30, 30, _C_TXT, env->equation);
@@ -56,13 +56,14 @@ int  main(int ac, char **av) {
           break;
         case -2:
           if (av[2] && av[2] && ft_strcmp(av[2], "--grapher") == 0) {
-            init_mlx(coefs);
+            init_mlx(0,coefs[1], coefs[0]);
           }
+          return (0);
       }
     }
     print_solutions(coefs);
     if (av[2] && av[2] && ft_strcmp(av[2], "--grapher") == 0) {
-      init_mlx(coefs);
+      init_mlx(coefs[2], coefs[1], coefs[0]);
     }
    exit(0);
     free_tab((void **)coefs);

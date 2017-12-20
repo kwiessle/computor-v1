@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:13:14 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/20 14:26:25 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/20 15:47:35 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static char    *equation_clear(char *dirty){
     }
     i++;
   }
+  free(dirty);
   return (tmp);
 }
 
@@ -64,8 +65,11 @@ static short check_number(char *clean, int i) {
   if (clean[i - 1] != '^' && clean[i - 1] != '+' && clean[i - 1] != '-' && clean[i - 1] != '.' && clean[i - 1] != '=' && (clean[i - 1] < '0' || clean[i - 1] > '9')) {
     return (-1);
   }
-  if (clean[i + 1] != '+' && clean[i +1] != '-' && clean[i +1] != '*' && clean[i +1] != '.' && clean[i +1] != '=' && (clean[i + 1] < '0' || clean[i + 1] > '9')) {
-    return (-1);
+  i++;
+  while(clean[i] && clean[i] != '+' && clean[i] != '-' && clean[i] != '*' && clean[i] != '.' && clean[i] != '='){
+    if (clean[i] < '0' || clean[i] > '9')
+      return (-1);
+    i++;
   }
   return(0);
 }
@@ -74,8 +78,13 @@ static short check_X(char *clean, int i) {
   if (clean[i - 1] != '+' && clean[i - 1] != '-' && clean[i - 1] != '*'){
     return (-1);
   }
-  if (clean[i + 1] != '+' && clean[i + 1] != '-' && clean[i + 1] != '=' && clean[i + 1] != '^'){
-    return (-1);
+  i++;
+  while( clean[i] ){
+     if(clean[i] == '^' || clean[i] == '+' || clean[i] == '-' || clean[i] == '=')
+      break;
+      else
+      return(-1);
+     i++;
   }
   return (0);
 }
@@ -84,17 +93,19 @@ static short check_operator(char *clean, int i) {
   if (clean[i - 1] != '=' && clean[i - 1] != 'X' && (clean[i - 1] < '0' || clean[i - 1] > '9')) {
     return (-1);
   }
-  if (clean[i + 1] != 'X' && (clean[i +1] < '0' || clean[i +1] > '9')) {
+  if(!clean[i + 1])
     return (-1);
+  i++;
+  while(clean[i] && clean[i] != '*' && clean[i] != '+' && clean[i] != '-' && clean[i] != '=' ) {
+    if ((clean[i] < '0' || clean[i] > '9') && clean[i] != '.' && clean[i] != 'X' && clean[i] != '^') {
+    }
+    i++;
   }
   return (0);
 }
 
 static short check_multiplicator(char *clean, int i){
-  if ((clean[i - 1] < '0' || clean[i - 1] > '9')) {
-    return (-1);
-  }
-  if (clean[i + 1] != 'X') {
+  if ((clean[i - 1] < '0' || clean[i - 1] > '9') && clean[i + 1] != 'X') {
     return (-1);
   }
   return (0);
@@ -104,8 +115,12 @@ static short check_pow(char *clean, int i) {
   if (clean[i - 1] != 'X'){
     return (-1);
   }
-  if (clean[i + 2] == '.' || clean[i + 2] =='^' || (clean[i + 1] < '0' || clean[i + 1] > '9')) {
-    return (-1);
+  i++;
+  while(clean[i] && clean[i] != '+' && clean[i] != '-' && clean[i] != '=') {
+      if (clean[i] < '0' || clean[i] > '9') {
+        return (-1);
+      }
+      i++;
   }
   return (0);
 }
@@ -124,8 +139,11 @@ static short check_dot(char *clean, int i) {
   if ((clean[i - 1] < '0' || clean[i -1] > '9')) {
     return (-1);
   }
-  if (clean[i + 2] == '.' || (clean[i + 1] < '0' || clean[i + 1] > '9')){
-    return (-1);
+  i++;
+  while(clean[i] && clean[i] != '*' && clean[i] != '+' && clean[i] != '-' && clean[i] != '=') {
+    if (clean[i] < '0' || clean[i] > '9')
+      return (-1);
+    i++;
   }
   return (0);
 }
@@ -134,7 +152,7 @@ short   equation_validator(char *equation) {
   int i = 1;
   if (clean[0] != 'X' && clean[0] != '+' && clean[0] != '-' && (clean[0] >= 0 && clean[0] < '0') && clean[0] > '9')
     return (-1);
-  while (clean[i] && clean[i+1] !='\0') {
+  while (clean[i]) {
     if (clean[i] >= '0' && clean[i] <= '9' && check_number(clean, i) < 0)
       return(-1);
     if (clean[i] == 'X'&& check_X(clean, i) < 0)
