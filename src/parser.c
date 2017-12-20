@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 18:04:44 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/19 13:34:58 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/20 14:25:40 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ static double high_loop(char **side, char *degree) {
     i++;
   }
   free(pow);
+  free(degree);
   return (coeff);
 }
 
@@ -209,7 +210,6 @@ double   *get_coeff(char *equation, int degree) {
   char    **sides;
   char    **left;
   char    **right;
-  char    *str_degree = ft_itoa(degree);
   double *coefs;
 
   if ( !(coefs = (double *)malloc(degree * sizeof(double) + 1)) ) {
@@ -220,7 +220,7 @@ double   *get_coeff(char *equation, int degree) {
   right = ft_strsplit(sides[1], ' ');
   while (degree >= 0) {
     if (degree >= 2) {
-      coefs[degree] = high_loop(left, str_degree) - high_loop(right, str_degree);
+      coefs[degree] = high_loop(left, ft_itoa(degree)) - high_loop(right, ft_itoa(degree));
     } else if (degree == 1) {
       coefs[degree] = low_loop(left) - low_loop(right);
     } else if (degree == 0) {
@@ -228,7 +228,6 @@ double   *get_coeff(char *equation, int degree) {
     }
     degree--;
   }
-  free(str_degree);
   free_tab((void **)left);
   free_tab((void **)right);
   free_tab((void **)sides);
