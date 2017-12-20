@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:13:14 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/20 15:47:35 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/20 16:12:22 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static char    *equation_clear(char *dirty){
     }
     i++;
   }
-  free(dirty);
   return (tmp);
 }
 

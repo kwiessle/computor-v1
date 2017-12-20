@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:40:23 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/20 15:16:36 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/20 16:16:09 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int  main(int ac, char **av) {
     }
     int max_pow = get_max_pow(equation_trimed);
     double *coefs = get_coeff(equation_trimed, max_pow);
+    free(equation_trimed);
     while (max_pow > 0 && coefs[max_pow] == 0) {
       max_pow--;
     }
@@ -55,19 +56,18 @@ int  main(int ac, char **av) {
           return (0);
           break;
         case -2:
-          if (av[2] && av[2] && ft_strcmp(av[2], "--grapher") == 0) {
+          if (ac == 3 && ft_strcmp(av[2], "--grapher") == 0) {
             init_mlx(0,coefs[1], coefs[0]);
           }
           return (0);
       }
     }
     print_solutions(coefs);
-    if (av[2] && av[2] && ft_strcmp(av[2], "--grapher") == 0) {
+    if (ac == 3 && ft_strcmp(av[2], "--grapher") == 0) {
       init_mlx(coefs[2], coefs[1], coefs[0]);
     }
-   exit(0);
-    free_tab((void **)coefs);
-    free(equation_trimed);
+    // free_tab((void **)coefs);
+    return (0);
   }
  }
   return (0);
