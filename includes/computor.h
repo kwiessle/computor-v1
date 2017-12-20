@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:39:06 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/20 14:07:28 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/20 14:08:00 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,7 @@ void		  mlx_put_pixel_to_img(t_env *env, double x, double y, int color);
 /* ERROR */
 
 void      display_error(short e_type);
-short     allowed_degree(char degree);
 short     allowed_format(char c);
-short     check_argument(char *equation);
 short     check_format(char *equation);
 short     equation_validator(char *equation);
 
