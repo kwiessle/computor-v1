@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:13:14 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/19 15:00:30 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/19 22:01:37 by kwiessle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,68 @@ short   check_format(char *equation) {
     return (_FAILURE);
   else
     return (_SUCCESS);
+}
+
+static char    *equation_clear(char *dirty){
+  short i = 0;
+  while (dirty[i]) {
+    if (dirty[i] == '#') {
+      dirty[i] = ' ';
+    }
+    i++;
+  }
+  return (dirty);
+}
+
+short   equation_validator(char *equation) {
+  char *clean = equation_clear(equation);
+  int i = 1;
+  if (clean[0] != '+' && clean[0] != '-' && (clean[0] >= 0 && clean[0] < '0') && clean[0] > '9')
+    return (-1);
+  while (clean[i]) {
+    if (clean[i] >= '0' && clean[i] <= '9') {
+      if (clean[i -1] != '+' && clean[i -1] != '-' && clean[i -1] != '.' && clean[i -1] != '=' && (clean[0] >= 0 && clean[0] < '0') && clean[0] > '9')
+        return (-1);
+      if (clean[i +1] != '+' && clean[i +1] != '-' && clean[i +1] != '*' && clean[i +1] != '.' && clean[i +1] != '=' && (clean[0] >= 0 && clean[0] < '0') && clean[0] > '9')
+        return (-1);
+    }
+    // if (clean[i] == 'X') {
+    //   if (clean[i -1] != '+' || clean[i -1] != '-' || clean[i -1] != '*')
+    //     printf("%c -> %c -> %c\n",clean[i -1], clean[i], clean[i +1]);
+    //   if (clean[i +1] != '+' || clean[i +1] != '-' || clean[i +1] != '=' || clean[i +1] != '^')
+    //     printf("%c -> %c -> %c\n",clean[i -1], clean[i], clean[i +1]);
+    // }
+    // if (clean[i] == '+' || clean[i] == '-') {
+    //   if (clean[i -1] != 'X' || !(clean[i -1] >= '0' && clean[i -1] <= '9'))
+    //     printf("%c -> %c -> %c\n",clean[i -1], clean[i], clean[i +1]);
+    //   if (clean[i +1] != 'X' || !(clean[i +1] >= '0' && clean[i +1] <= '9'))
+    //     printf("%c -> %c -> %c\n",clean[i -1], clean[i], clean[i +1]);
+    // }
+    // if (clean[i] == '*') {
+    //   if (!(clean[i -1] >= '0' && clean[i -1] <= '9'))
+    //     printf("%c -> %c -> %c\n",clean[i -1], clean[i], clean[i +1]);
+    //   if (clean[i +1] != 'X')
+    //     printf("%c -> %c -> %c\n",clean[i -1], clean[i], clean[i +1]);
+    // }
+    // if (clean[i] == '^') {
+    //   if (clean[i -1] != 'X')
+    //     printf("%c -> %c -> %c\n",clean[i -1], clean[i], clean[i +1]);
+    //   if (!(clean[i +1] <= '0' && clean[i +1] <= '9'))
+    //     printf("%c -> %c -> %c\n",clean[i -1], clean[i], clean[i +1]);
+    // }
+    // if (clean[i] == '=') {
+    //   if (clean[i -1] != 'X' || !(clean[i -1] >= '0' && clean[i -1] <= '9'))
+    //     printf("%c -> %c -> %c\n",clean[i -1], clean[i], clean[i +1]);
+    //   if (clean[i +1] != '+' || clean[i +1] != '-' || clean[i +1] != 'X' || !(clean[i +1] >= '0' && clean[i +1] <= '9'))
+    //     printf("%c -> %c -> %c\n",clean[i -1], clean[i], clean[i +1]);
+    // }
+    // if (clean[i] == '.') {
+    //   if (!(clean[i -1] >= '0' && clean[i -1] <= '9'))
+    //     printf("%c -> %c -> %c\n",clean[i -1], clean[i], clean[i +1]);
+    //   if (!(clean[i +1] >= '0' && clean[i +1] <= '9'))
+    //     printf("%c -> %c -> %c\n",clean[i -1], clean[i], clean[i +1]);
+    // }
+    i++;
+  }
+  return (0);
 }

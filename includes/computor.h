@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:39:06 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/20 11:32:37 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/20 14:07:28 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ short     allowed_degree(char degree);
 short     allowed_format(char c);
 short     check_argument(char *equation);
 short     check_format(char *equation);
+short     equation_validator(char *equation);
 
 /* MATH */
 

@@ -6,7 +6,7 @@
 /*   By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 18:40:23 by kwiessle          #+#    #+#             */
-/*   Updated: 2017/12/20 11:49:32 by vquesnel         ###   ########.fr       */
+/*   Updated: 2017/12/20 14:07:28 by vquesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ int  main(int ac, char **av) {
       return (0);
   } else {
     char *equation_trimed = super_trim(av[1]);
+    if (equation_validator(equation_trimed) == -1) {
+      display_error(3);
+      return (0);
+    }
     int max_pow = get_max_pow(equation_trimed);
     double *coefs = get_coeff(equation_trimed, max_pow);
     while (max_pow > 0 && coefs[max_pow] == 0) {
