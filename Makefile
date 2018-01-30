@@ -6,12 +6,12 @@
 #    By: kwiessle <kwiessle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/23 18:37:17 by kwiessle          #+#    #+#              #
-#    Updated: 2017/12/19 11:35:11 by vquesnel         ###   ########.fr        #
+#    Updated: 2018/01/29 19:59:43 by kwiessle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= computor
-LOGIN= kwiessle/vquesnel
+LOGIN= kwiessle
 
 SRCS= src/main.c \
 			src/error.c \
